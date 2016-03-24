@@ -1,14 +1,9 @@
-.. _cpp-pdal-utils
-
-.. index:: Utils
+.. _cpp-pdal-stagefactory:
 
 ******************************************************************************
-``pdal::Utils``
+:cpp:class:`pdal::StageFactory`
 ******************************************************************************
 
-:cpp:namespace:`pdal::Utils` is a set of utility functions.
-
-.. doxygennamespace:: pdal::Utils
+.. doxygenclass:: pdal::StageFactory
    :members:
    :undoc-members:
-

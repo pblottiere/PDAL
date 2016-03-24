@@ -95,7 +95,7 @@ std::string StageFactory::inferReaderDriver(const std::string& filename)
     std::map<std::string, std::string> drivers;
     drivers["bin"] = "readers.terrasolid";
     drivers["bpf"] = "readers.bpf";
-    drivers["cpd"] = "readers.optech";
+    drivers["csd"] = "readers.optech";
     drivers["greyhound"] = "readers.greyhound";
     drivers["icebridge"] = "readers.icebridge";
     drivers["las"] = "readers.las";
@@ -232,12 +232,7 @@ StageFactory::StageFactory(bool no_plugins)
     PluginManager::initializePlugin(NullWriter_InitPlugin);
 }
 
-/// Create a stage and return a pointer to the created stage.
-/// The factory takes ownership of any successfully created stage.
-///
-/// \param[in] stage_name  Type of stage to by created.
-/// \return  Pointer to created stage.
-///
+
 Stage *StageFactory::createStage(std::string const& stage_name)
 {
     static_assert(0 < sizeof(Stage), "");
@@ -248,6 +243,19 @@ Stage *StageFactory::createStage(std::string const& stage_name)
         m_ownedStages.push_back(std::unique_ptr<Stage>(s));
     }
     return s;
+}
+
+
+void StageFactory::destroyStage(Stage *s)
+{
+    for (auto it = m_ownedStages.begin(); it != m_ownedStages.end(); ++it)
+    {
+        if (s == it->get())
+        {
+            m_ownedStages.erase(it);
+            break;
+        }
+    }
 }
 
 } // namespace pdal
