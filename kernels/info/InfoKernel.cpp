@@ -146,6 +146,7 @@ void InfoKernel::addSwitches(ProgramArgs& args)
     args.add("metadata", "dump file metadata info", m_showMetadata);
     args.add("pointcloudschema", "dump PointCloudSchema XML output",
         m_PointCloudSchemaOutput).setHidden();
+    args.add("driver", "open with a specific driver", m_driver);
 }
 
 // Support for parsing point numbers.  Points can be specified singly or as
@@ -276,7 +277,12 @@ PipelineManagerPtr InfoKernel::makePipeline(const std::string& filename,
     else
     {
         StageFactory factory;
-        std::string driver = factory.inferReaderDriver(filename);
+        std::string driver("");
+        if (m_driver.size())
+            driver = m_driver;
+        else
+            driver = factory.inferReaderDriver(filename);
+
 
         if (driver.empty())
             throw pdal_error("Cannot determine input file type of " + filename);

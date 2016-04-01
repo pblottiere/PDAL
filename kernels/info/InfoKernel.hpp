@@ -101,6 +101,7 @@ private:
 
     MetadataNode m_tree;
     PipelineManagerPtr m_manager;
+    std::string m_driver;
 };
 
 } // namespace pdal
