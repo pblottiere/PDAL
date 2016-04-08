@@ -2,17 +2,17 @@
 
 builddir=$1
 destdir=$2
-DATE=$(shell date +'%y.%m.%d %H:%M:%S')
+DATE=$(date +'%y.%m.%d %H:%M:%S')
 
 git clone git@github.com:PDAL/pdal.github.io.git $destdir/pdaldocs
 cd $destdir/pdaldocs
-git checkout gh-pages
+git checkout master
 
 
 cd $builddir/html
-cp -rf * $destdir/proj4docs
+cp -rf * $destdir/pdaldocs
 
-cd $destdir/proj4docs
+cd $destdir/pdaldocs
 git config user.email "pdal@hobu.net"
 git config user.name "PDAL Travis docsbot"
 
