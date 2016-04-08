@@ -22,9 +22,9 @@ before_install: ./scripts/ci/before_install.sh
 script:
     docker run -v $TRAVIS_BUILD_DIR:/pdal -e CXX="$CXX" -e CC="$CC" -e PDAL_OPTIONAL_COMPONENTS="$PDAL_OPTIONAL_COMPONENTS" -t pdal/dependencies:latest /bin/sh -c "/pdal/scripts/ci/script.sh"
 
-after_succes:
-  - echo "$TRAVIS_SECURE_ENV_VARS"
-  - sh -c "./travis/build_docs.sh"
+after_success:
+  - echo "secure travis:" "$TRAVIS_SECURE_ENV_VARS"
+  - sh -c "./scripts/ci/build_docs.sh"
   - sh -c 'if test "$TRAVIS_SECURE_ENV_VARS" = "true" -a "$TRAVIS_BRANCH" = "document-automation"; then echo "publish website"; ./scripts/ci/add_deploy_key.sh; ./scripts/ci/deploy_website.sh $TRAVIS_BUILD_DIR/docs/build /tmp; fi'
 
 notifications:
