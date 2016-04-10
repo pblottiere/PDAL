@@ -26,8 +26,9 @@ items:
 
 .. note::
 
-    For the website, PDAL builds the documentation using `Travis`_ and :ref:`docker`.
+    For the website, PDAL builds the documentation using :ref:`travis` and :ref:`docker`.
     You can get a listing of the exact Ubuntu requirements in the `Dockerfile`_.
+    See :ref:`integration` for more detail.
 
 .. _`Dockerfile`: https://github.com/PDAL/PDAL/tree/master/scripts/docker/docbuild/Dockerfile
 

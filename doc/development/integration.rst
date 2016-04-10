@@ -1,7 +1,7 @@
 .. _integration:
 
 ================================================================================
-Continuous Integration Testing
+Continuous Integration
 ================================================================================
 
 PDAL :ref:`regression tests <pdal_test>` are run on a per-commit basis by at
@@ -11,13 +11,13 @@ least two continuous integration platforms.
 Status
 --------------------------------------------------------------------------------
 
-.. |travis|
-.. |appveyor|
+|travisstatus|
+|appveyorstatus|
 
-.. |travis| image:: https://travis-ci.org/PDAL/PDAL.png?branch=master
+.. |travisstatus| image:: https://travis-ci.org/PDAL/PDAL.png?branch=master
    :target: https://travis-ci.org/PDAL/PDAL
 
-.. |appveyor| image:: https://ci.appveyor.com/api/projects/status/github/pdal/pdal?branch=master&svg=true
+.. |appveyorstatus| image:: https://ci.appveyor.com/api/projects/status/github/pdal/pdal?branch=master&svg=true
    :target: https://ci.appveyor.com/project/hobu/pdal
 
 .. _travis:

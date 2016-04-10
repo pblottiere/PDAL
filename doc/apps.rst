@@ -531,9 +531,9 @@ file can be specified by specifying the OGR code for the format using the
 ``--driver`` option.  If no driver is specified, the format defaults to "ESRI
 Shapefile".
 
-In vector file-speak, each file specified by ``filespec`` is stored as a feature
-in a layer in the index file. The ``filespec`` is a `glob pattern
-<http://man7.org/linux/man-pages/man7/glob.7.html>'_.  and normally needs to be
+In vector file-speak, each file specified by ``filespec`` is stored as a
+feature in a layer in the index file. The ``filespec`` is a `glob pattern
+<http://man7.org/linux/man-pages/man7/glob.7.html>`_.  and normally needs to be
 quoted to prevent shell expansion of wildcard characters.
 
 ::

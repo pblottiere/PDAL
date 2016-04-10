@@ -16,6 +16,6 @@ found in this section.
    errorhandling
    goals
    testing
-   travis
+   integration
 
 
