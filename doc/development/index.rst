@@ -17,5 +17,6 @@ found in this section.
    goals
    testing
    integration
+   json_pipeline_specification
 
 

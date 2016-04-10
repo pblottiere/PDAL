@@ -6,7 +6,7 @@ RUN apt-get -y update && apt-get install -y \
     texlive-latex-extra git \
     graphviz python-matplotlib
 
-RUN pip install Sphinx==1.3.6 rst2pdf breathe \
+RUN pip install Sphinx==1.4 breathe \
     sphinx_bootstrap_theme awscli sphinxcontrib-bibtex \
     sphinx_rtd_theme
 

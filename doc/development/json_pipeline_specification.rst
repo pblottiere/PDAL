@@ -1,7 +1,7 @@
 .. _json_pipeline_specification:
 
 ======================================
-Draft PDAL JSON Pipeline Specification
+PDAL JSON Pipeline Specification
 ======================================
 
 :Authors:
@@ -16,14 +16,13 @@ Draft PDAL JSON Pipeline Specification
 The PDAL JSON specification is a point cloud processing pipeline interchange
 format based on JavaScript Object Notation (JSON).
 
-.. sectnum::
 .. contents::
-   :depth: 4
+   :depth: 2
    :backlinks: none
 
-============
 Introduction
-============
+--------------------------------------------------------------------------------
+
 
 A PDAL JSON object represents a processing pipeline.
 
@@ -35,7 +34,7 @@ a string, number, object, array or one of the literals: "true", "false", and
 described above.
 
 Examples
---------
+................................................................................
 
 A simple PDAL pipeline, inferring the appropriate drivers for the reader and
 writer from filenames, and able to be specified as a set of sequential steps:
@@ -54,7 +53,7 @@ writer from filenames, and able to be specified as a set of sequential steps:
   }
 
 A more complex PDAL pipeline, that reprojects the stage tagged ``A1``, merges
-the result with ``B``, and writes the merged output with the ``points2grid``
+the result with ``B``, and writes the merged output with the :ref:`writers.p2g`
 plugin.:
 
 .. code-block:: json
@@ -91,7 +90,7 @@ plugin.:
   }
 
 Definitions
------------
+................................................................................
 
 * JavaScript Object Notation (JSON), and the terms object, name, value, array,
   and number, are defined in IETF RTC 4627, at
@@ -102,9 +101,8 @@ Definitions
   be interpreted as described in IETF RFC 2119, at
   http://www.ietf.org/rfc/rfc2119.txt.
 
-=====================
 PDAL Pipeline Objects
-=====================
+--------------------------------------------------------------------------------
 
 PDAL JSON pipelines always consist of a single object. This object (referred to
 as the PDAL JSON object below) represents a processing pipeline.
@@ -116,7 +114,7 @@ as the PDAL JSON object below) represents a processing pipeline.
 .. _pipeline_array:
 
 Pipeline Array
---------------
+................................................................................
 
 * The pipeline array may have any number of string or :ref:`stage_object`
   elements.
@@ -128,7 +126,7 @@ Pipeline Array
 .. _stage_object:
 
 Stage Objects
--------------
+................................................................................
 
 For more on PDAL stages and their options, check the PDAL documentation on
 `Readers, Writers, and Filters <http://www.pdal.io/stages/index.html>`_.
@@ -163,18 +161,17 @@ For more on PDAL stages and their options, check the PDAL documentation on
   stage-specific option names and their respective values.
 
 Filename Globbing
------------------
+................................................................................
 
 * A filename may contain the wildcard character ``*`` to match any string of
   characters. This can be useful if working with multiple input files in a
   directory (e.g., merging all files).
 
-=================
 Extended Examples
-=================
+--------------------------------------------------------------------------------
 
 BPF to LAS
-----------
+................................................................................
 
 The following pipeline converts the input file from BPF to LAS, inferring both
 the reader and writer type, and setting a number of options on the writer stage.
@@ -197,7 +194,7 @@ the reader and writer type, and setting a number of options on the writer stage.
   }
 
 Python HAG
-----------
+................................................................................
 
 In our next example, the reader and writer types are once again inferred. After
 reading the input file, the ferry filter is used to copy the Z dimension into a
@@ -205,6 +202,11 @@ new height above ground (HAG) dimension. Next, the programmable filter is used
 with a python script to compute height above ground values by comparing the Z
 values to a surface model. These height above ground values are then written
 back into the Z dimension for further analysis.
+
+.. seealso::
+
+    :ref:`filters.height` describes using a specific filter to do
+    this job in more detail.
 
 .. code-block:: json
 
@@ -226,12 +228,12 @@ back into the Z dimension for further analysis.
   }
 
 DTM
----
+................................................................................
 
 A common task is to create a digital terrain model (DTM) from the input point
 cloud. This pipeline infers the reader type, applies an approximate ground
-segmentation filter, and then creates the DTM using the Points2Grid writer with
-only the ground returns.
+segmentation filter using :ref:`filters.ground`, and then creates the DTM using
+the :ref:`writers.p2g` with only the ground returns.
 
 .. code-block:: json
 
@@ -261,7 +263,7 @@ only the ground returns.
   }
 
 Decimate & Colorize
--------------------
+................................................................................
 
 This example still infers the reader and writer types while applying options on
 both. The pipeline decimates the input LAS file by keeping every other point,
@@ -295,12 +297,13 @@ written as ASCII text.
   }
 
 Merge & Reproject
------------------
+................................................................................
 
 Our first example with multiple readers, this pipeline infers the reader types,
-and assigns spatial reference information to each. Next, the merge filter merges
-points from all previous readers, and the reprojection filter reprojects data to
-the specified output spatial reference system.
+and assigns spatial reference information to each. Next, the
+:ref:`filters.merge` merges points from all previous readers, and the
+:ref:`filters.reprojection` filter reprojects data to the specified output
+spatial reference system.
 
 .. code-block:: json
 
@@ -325,7 +328,7 @@ the specified output spatial reference system.
   }
 
 Globbed Inputs
---------------
+................................................................................
 
 Finally, we capture another merge pipeline demonstrating the ability to glob
 multiple input LAS files from a given directory.
@@ -341,3 +344,4 @@ multiple input LAS files from a given directory.
           "output.las"
       ]
   }
+

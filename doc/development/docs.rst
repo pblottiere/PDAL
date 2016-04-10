@@ -23,6 +23,7 @@ items:
 .. _`sphinx_bootstrap_theme`: https://pypi.python.org/pypi/sphinx-bootstrap-theme/
 .. _`sphinx_rtd_theme`: https://pypi.python.org/pypi/sphinx_rtd_theme/
 .. _`Latex`: https://en.wikipedia.org/wiki/LaTeX
+.. _`pdflatex`: https://www.tug.org/applications/pdftex/
 
 .. note::
 
@@ -40,7 +41,7 @@ Python dependencies should be installed from PyPI_ with ``pip`` or
 
 .. code-block:: bash
 
-    (sudo) pip install sphinx breathe rst2pdf sphinx_bootstrap_theme
+    (sudo) pip install sphinx breathe sphinx_bootstrap_theme
 
 .. note::
 
@@ -60,8 +61,7 @@ doxygen``.
 Latex
 --------------------------------------------------------------------------------
 
-`Latex`_ is used for equation editing inside of Sphinx. It is used to generate
-figures and graphs.
+`Latex`_ and `pdflatex`_ are used to generate the companion PDF of the website.
 
 dvipng
 --------------------------------------------------------------------------------

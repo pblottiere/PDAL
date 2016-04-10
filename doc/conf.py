@@ -27,7 +27,7 @@ import sphinx_bootstrap_theme
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['breathe', 'sphinx.ext.autodoc', 'rst2pdf.pdfbuilder', 'sphinx.ext.imgmath','rst2pdf.pdfbuilder']
+extensions = ['breathe', 'sphinx.ext.autodoc', 'sphinx.ext.imgmath']
 
 # disqus_shortname = 'pdal'
 
