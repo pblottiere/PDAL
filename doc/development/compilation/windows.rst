@@ -101,7 +101,7 @@ libxml2, iconv.
   Select "libxml2".
    .. figure::  media/OSGeo4WInstallLibXML2.png
   Select "iconv".
-   .. figure::  media/OSGeo4WInstallIconv.png
+   .. figure::  media/OSGeo4WInstallIConv.png
   Select "oci".
    .. figure::  media/OSGeo4WInstallOCI.png
 
