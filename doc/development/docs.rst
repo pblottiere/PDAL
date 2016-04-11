@@ -29,7 +29,7 @@ items:
 
 .. _`Dockerfile`: https://github.com/PDAL/PDAL/tree/master/scripts/docker/docbuild/Dockerfile
 
-Sphinx, Breathe_ and Bootstrap
+Sphinx_ and Breathe_
 --------------------------------------------------------------------------------
 
 Python dependencies should be installed from PyPI_ with ``pip`` or

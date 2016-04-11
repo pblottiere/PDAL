@@ -42,15 +42,20 @@ Usage
    :glob:
 
    apps/index
-   tutorial/index
-   tutorial/docker
+   quickstart
    stages/readers
    stages/writers
    stages/filters
    pipeline
-   metadata
-   faq
+   tutorial/index
 
+Workshop
+--------------------------------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 2
+
+   Workshop <workshop/index>
 
 Development
 --------------------------------------------------------------------------------
@@ -60,7 +65,9 @@ Development
 
    development/index
    api/index
+   faq
    copyright
+
 
 
 

@@ -371,6 +371,12 @@ multiple input LAS files from a given directory.
   }
 
 
+.. seealso::
+
+    The PDAL source tree contains a number of example pipelines that
+    are used for testing. You might find these inspiring. Go to
+    https://github.com/PDAL/PDAL/tree/master/test/data/pipeline to find
+    more.
 
 API Considerations
 ------------------------------------------------------------------------------

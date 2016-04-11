@@ -47,9 +47,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'PDAL'
-
 copyright = u'%d' % year
-author = u'Howard Butler, Brad Chambers, Pete Gadomski'
 
 
 # The version info for the project you're documenting, acts as replacement for
@@ -95,7 +93,7 @@ version = release
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = ['workshop']
+exclude_patterns = ['workshop/slides']
 
 # The reST default role (used for this markup: `text`) to use for all documents.
 #default_role = None
@@ -242,7 +240,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-        (master_doc, 'PDAL-%s.tex'%version, u'PDAL: Point cloud Data Abstraction Library',
+        (master_doc, '%s.tex'% project, u'PDAL: Point cloud Data Abstraction Library',
          r'Howard Butler\\Brad Chambers\\Michael Gerlek\\PDAL Contributors', 'manual'),
 ]
 

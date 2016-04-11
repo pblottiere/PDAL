@@ -17,6 +17,7 @@ developing new code can be found in this section.
    contributors
    docs
    errorhandling
+   metadata
    goals
    testing
    integration
