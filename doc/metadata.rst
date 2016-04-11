@@ -4,10 +4,6 @@
 Metadata
 ******************************************************************************
 
-:Author: Howard Butler
-:Contact: hobu.inc at gmail dot com
-:Date: 5/30/2012
-
 Metadata is an important component of any data processing story. PDAL attempts
 to allow users to operate with metadata in a relatively free-form way, with
 its main Metadata utility, :cpp:class:`pdal::Metadata`.

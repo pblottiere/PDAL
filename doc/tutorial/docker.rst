@@ -4,10 +4,6 @@
 Docker
 ******************************************************************************
 
-:Author: Howard Butler
-:Contact: howard@hobu.co
-:Date: 01/07/2015
-
 .. index:: Docker
 
 Introduction

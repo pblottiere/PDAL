@@ -4,10 +4,6 @@
 Applications
 ******************************************************************************
 
-:Author: Howard Butler
-:Contact: howard at hobu.co
-:Date: 03/13/2016
-
 PDAL contains consists of a single application, called ``pdal``. The ``pdal``
 application currently has the following subcommands:
 

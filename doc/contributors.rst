@@ -4,10 +4,6 @@
 Contributors
 ******************************************************************************
 
-:Author: Howard Butler
-:Contact: howard@hobu.co
-:Date: 12/29/2015
-
 Numerous organizations, companies, and individuals have contributed time,
 money, and code to build PDAL up into a highly capable software package.
 Without these contributions, PDAL would not progress as quickly, and its
@@ -67,7 +63,7 @@ management systems. `CRREL`_'s `GRiD`_ project manages LiDAR and point cloud
 data for a multitude of U.S. Army Corps missions. Find out more about GRiD in
 this `LiDAR Magazine article`_.
 
-.. image:: ./nsf1.gif
+.. image:: ./nsf1.png
     :target: http://www.nsf.gov
 
 .. image:: ./uoh.png

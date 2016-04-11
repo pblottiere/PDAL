@@ -4,10 +4,6 @@
 Pipeline
 ******************************************************************************
 
-:Author: Howard Butler
-:Contact: howard@hobu.co
-:Date: 03/22/2016
-
 Pipelines are the operative construct in PDAL -- you must construct pipelines
 to perform data translation operations, filter data, or simply to provide data
 to an endpoint. This document describes some features and background of PDAL
@@ -24,7 +20,8 @@ operations.
 
     As of PDAL 1.2, `JSON`_ is now the preferred specification language
     for PDAL pipelines. XML read support is still available at 1.2, but
-    JSON is preferred.
+    JSON is preferred. See :ref:`json_pipeline_specification` for details
+    how to create pipelines using JSON.
 
 .. _`JSON`: http://www.json.org/
 
