@@ -1,7 +1,7 @@
 .. _building:
 
 ******************************************************************************
-Installation
+Compilation
 ******************************************************************************
 
 This section describes how to build and install PDAL under Windows, Linux, and Mac.

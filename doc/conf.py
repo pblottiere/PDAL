@@ -203,36 +203,63 @@ htmlhelp_basename = 'PDALdoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
+preamble = r'''
+  \makeatother
+  %\color {blue}
+  %\normalcolor {dark blue}
+  \definecolor{VerbatimColor}{RGB}{239, 239, 239}
+  \definecolor{VerbatimBorderColor}{RGB}{148, 148, 148}
+  \usepackage{geometry}
+   \geometry{
+   letterpaper,
+   left={30mm},
+  }
+  \raggedright
+'''
 
-# The paper size ('letter' or 'a4').
-#latex_paper_size = 'letter'
+
+
+latex_elements = {
+# The paper size ('letterpaper' or 'a4paper').
+'papersize': 'letterpaper',
+# 'classoptions': ',oneside',
+# 'babel': '\\usepackage[english]{babel}',
 
 # The font size ('10pt', '11pt' or '12pt').
-#latex_font_size = '10pt'
+'pointsize': '12pt',
+
+# Additional stuff for the LaTeX preamble.
+#'preamble': '\setcounter{tocdepth}{0} ',
+'preamble': preamble,
+
+# Latex figure (float) alignment
+'figure_align': 'htbp',
+'releasename':'',
+'tocdepth':4,
+}
 
 # Grouping the document tree into LaTeX files. List of tuples
-# (source start file, target name, title, author, documentclass [howto/manual]).
-# latex_documents = [
-#   ('index', 'PDAL.tex', u'PDAL Documentation',
-#    u'Howard Butler', 'manual'),
-# ]
+# (source start file, target name, title,
+#  author, documentclass [howto, manual, or own class]).
+latex_documents = [
+        (master_doc, 'PDAL-%s.tex'%version, u'PDAL: Point cloud Data Abstraction Library',
+         r'Howard Butler\\Brad Chambers\\Michael Gerlek\\PDAL Contributors', 'manual'),
+]
 
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.
-#latex_logo = None
+latex_logo = './_static/logo/pdal_logo_only.png'
 
 # For "manual" documents, if this is true, then toplevel headings are parts,
 # not chapters.
-#latex_use_parts = False
+latex_use_parts = False
 
 # If true, show page references after internal links.
-#latex_show_pagerefs = False
+latex_show_pagerefs = True
 
 # If true, show URL addresses after external links.
-#latex_show_urls = False
+latex_show_urls = True
 
-# Additional stuff for the LaTeX preamble.
-#latex_preamble = ''
 
 # Documents to append as an appendix to all manuals.
 #latex_appendices = []
@@ -240,15 +267,6 @@ htmlhelp_basename = 'PDALdoc'
 # If false, no module index is generated.
 #latex_domain_indices = True
 
-
-
-# -- Options for Epub output ---------------------------------------------------
-
-# Bibliographic Dublin Core info.
-epub_title = u'PDAL'
-epub_author = u'Howard Butler'
-epub_publisher = u'Howard Butler'
-epub_copyright = u'2011, Howard Butler'
 
 
 breathe_projects = {

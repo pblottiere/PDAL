@@ -13,15 +13,11 @@ items:
 
 * Sphinx_
 * Breathe_
-* `sphinx_bootstrap_theme`_
-* `sphinx_rtd_theme`_
 * `Doxygen`_
 * `Latex`_
 * `dvipng`_
 
 .. _`dvipng`: https://en.wikipedia.org/wiki/Dvipng
-.. _`sphinx_bootstrap_theme`: https://pypi.python.org/pypi/sphinx-bootstrap-theme/
-.. _`sphinx_rtd_theme`: https://pypi.python.org/pypi/sphinx_rtd_theme/
 .. _`Latex`: https://en.wikipedia.org/wiki/LaTeX
 .. _`pdflatex`: https://www.tug.org/applications/pdftex/
 
@@ -41,7 +37,7 @@ Python dependencies should be installed from PyPI_ with ``pip`` or
 
 .. code-block:: bash
 
-    (sudo) pip install sphinx breathe sphinx_bootstrap_theme
+    (sudo) pip install sphinx breathe
 
 .. note::
 
@@ -102,7 +98,7 @@ The http://pdal.io website is regenerated from the ``*-maintenance`` branch usin
 to the https://github.com/PDAL/pdal.github.io repository. The website
 is then served via `GitHub Pages`_.
 
-..note::
+.. note::
 
     The website is regenerated and pushed only on the ``after_success`` :ref:`travis`
     call. If the tests aren't passing, the website won't be updated.
