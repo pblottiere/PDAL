@@ -17,6 +17,7 @@ In addition to the library code, PDAL provides a suite of command-line
 applications that users can conveniently use to process, filter, translate, and
 query point cloud data.  See :ref:`apps` for more information.
 
+The entire website is available as a single PDF at http://pdal.io/PDAL.pdf
 
 Download
 --------------------------------------------------------------------------------
