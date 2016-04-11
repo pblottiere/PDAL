@@ -7,10 +7,6 @@ tindex
 The ``tindex`` command is used to create a `GDAL`_-style tile index for
 PDAL-readable point cloud types (see `gdaltindex`_).
 
-.. note::
-
-    The ``tindex`` command is only available when PDAL is linked with `GDAL`_.
-
 The ``tindex`` command has two modes.  The first mode creates a spatial index
 file for a set of point cloud files.  The second mode creates a point cloud
 file that is the result of merging the points from files referred to in a
@@ -24,11 +20,13 @@ tindex Creation Mode
     $ pdal tindex <tindex> <filespec>
 
 This command will index the files referred to by ``filespec`` and place the
-result in ``tindex``.  The ``tindex`` is a vector file or database that can be
-handled by `OGR <http://www.gdal.org/ogr_formats.html>`_. The type of the index
+result in ``tindex``.  The ``tindex`` is a vector file or database that
+will be created by ``pdal`` as necessary to store the file index.
+The type of the index
 file can be specified by specifying the OGR code for the format using the
 ``--driver`` option.  If no driver is specified, the format defaults to "ESRI
-Shapefile".
+Shapefile".  Any filetype that can be handled by
+`OGR <http://www.gdal.org/ogr_formats.html>`_ is acceptable.
 
 In vector file-speak, each file specified by ``filespec`` is stored as a
 feature in a layer in the index file. The ``filespec`` is a `glob pattern
@@ -59,10 +57,11 @@ tindex Merge Mode
 
     $ pdal tindex --merge <tindex> <filespec>
 
-This command will read the index file ``tindex`` and merge the points in the
-files listed index file that pass any filter that might be specified, writing
-the output to the point cloud file specified in ``filespec``.  The type of the
-output file is determined automatically from the filename extension.
+This command will read the existing index file ``tindex`` and merge the
+points in the indexed files that pass any filter that might be specified,
+writing the output to the point cloud file specified in ``filespec``.
+The type of the output file is determined automatically from the filename
+extension.
 
 ::
 
@@ -97,7 +96,6 @@ write out an `SQLite`_ file.
 
     $ pdal tindex index.sqlite "*.las" -f "SQLite" --lyr_name "pdal" \
         --t_srs "EPSG:4326"
-
 
 
 .. _`SQLite`: http://www.sqlite.org
