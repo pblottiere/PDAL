@@ -191,7 +191,6 @@ with PDAL, and :ref:`writers` lists the formats PDAL can write.
 .. _`Oracle Point Cloud`: http://docs.oracle.com/cd/B28359_01/appdev.111/b28400/sdo_pc_pkg_ref.htm
 .. _`pgpointcloud`: https://github.com/pramsey/pointcloud
 
-.. _`LASzip`: http://laszip.org
 .. _`VirtualBox`: https://www.virtualbox.org/
 .. _`GDAL`: http://gdal.org
 .. _`MapServer`: http://mapserver.org

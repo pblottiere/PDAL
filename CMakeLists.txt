@@ -111,7 +111,6 @@ include(${PDAL_CMAKE_DIR}/gdal.cmake)
 include(${PDAL_CMAKE_DIR}/geos.cmake)
 include(${PDAL_CMAKE_DIR}/geotiff.cmake)  # Optional (not really)
 include(${PDAL_CMAKE_DIR}/lazperf.cmake)  # Optional
-include(${PDAL_CMAKE_DIR}/laszip.cmake)  # Optional
 include(${PDAL_CMAKE_DIR}/threads.cmake)
 include(${PDAL_CMAKE_DIR}/zlib.cmake)
 include(${PDAL_CMAKE_DIR}/test.cmake)

@@ -170,7 +170,7 @@ pdal::Options StageFactory::inferWriterOptionsChanges(
     Options options;
 
     if (Utils::iequals(ext,".laz"))
-        options.add("compression", true);
+        options.add("compression", "true");
 
     if (Utils::iequals(ext, ".pcd") &&
         PluginManager::createObject("writers.pcd"))

@@ -1,7 +1,6 @@
 USR_LOCAL="/usr/local"
 USR="/usr"
 TIFF_HOME=$USR_LOCAL
-LASZIP_HOME=$USR_LOCAL
 LIBXML2_HOME=/usr/local/Cellar/libxml2/2.9.2/
 WEBSOCKETPP_HOME=/Users/hobu/dev/git/websocketpp
 GEOTIFF_HOME=$USR_LOCAL
@@ -48,8 +47,6 @@ CC=$CC CXX=$CXX cmake   -G "$CONFIG"  \
         -DGEOTIFF_LIBRARY=${GEOTIFF_HOME}/lib/libgeotiff.${SO_EXT} \
         -DP2G_INCLUDE_DIR=${P2G_HOME}/include \
         -DP2G_LIBRARY=${P2G_HOME}/lib/libpts2grd.${SO_EXT} \
-        -DLASZIP_INCLUDE_DIR=${LASZIP_HOME}/include \
-        -DLASZIP_LIBRARY=${LASZIP_HOME}/lib/liblaszip.${SO_EXT} \
         -DLIBXML2_INCLUDE_DIR=${LIBXML2_HOME}/include/libxml2 \
         -DLIBXML2_LIBRARIES=${LIBXML2_HOME}/lib/libxml2.${SO_EXT} \
         -DLazperf_DIR=${LAZPERF_HOME}/ \

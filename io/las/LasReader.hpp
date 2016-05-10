@@ -42,7 +42,6 @@
 #include "LasError.hpp"
 #include "LasHeader.hpp"
 #include "LasUtils.hpp"
-#include "ZipPoint.hpp"
 
 extern "C" int32_t LasReader_ExitFunc();
 extern "C" PF_ExitFunc LasReader_InitPlugin();
@@ -112,13 +111,10 @@ protected:
 private:
     LasError m_error;
     LasHeader m_header;
-    std::unique_ptr<ZipPoint> m_zipPoint;
-    std::unique_ptr<LASunzipper> m_unzipper;
     std::unique_ptr<LazPerfVlrDecompressor> m_decompressor;
     std::vector<char> m_decompressorBuf;
     point_count_t m_index;
     std::vector<ExtraDim> m_extraDims;
-    std::string m_compression;
 
     virtual void processOptions(const Options& options);
     virtual void initialize(PointTableRef table)

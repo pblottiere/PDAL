@@ -87,16 +87,6 @@ bool IsLibGeoTIFFEnabled()
 #endif
 }
 
-/// Check if LasZip compression support has been built in to PDAL
-bool IsLasZipEnabled()
-{
-#ifdef PDAL_HAVE_LASZIP
-    return true;
-#else
-    return false;
-#endif
-}
-
 int GetVersionMajor()
 {
     return PDAL_VERSION_MAJOR;

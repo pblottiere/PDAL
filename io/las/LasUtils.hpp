@@ -46,7 +46,6 @@ namespace LasCompression
 
 enum Enum
 {
-    LasZip,
     LazPerf,
     None
 };

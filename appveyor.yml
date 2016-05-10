@@ -43,7 +43,7 @@ install:
   # get the OSGeo installer
   - ps: (new-object net.webclient).DownloadFile("http://download.osgeo.org/osgeo4w/osgeo4w-setup-x86_64.exe", "C:\temp\osgeo4w-setup.exe")
   # and install our dependencies
-  - C:\temp\osgeo4w-setup.exe -q -k -r -A -s http://download.osgeo.org/osgeo4w/ -a x86_64 -P boost-devel,eigen,gdal,geos,hexer,iconv,laszip,libgeotiff,libpq,libtiff,libxml2,nitro,pcl,points2grid,proj,python-numpy,zlib -R %OSGEO4W_ROOT% > NUL
+  - C:\temp\osgeo4w-setup.exe -q -k -r -A -s http://download.osgeo.org/osgeo4w/ -a x86_64 -P boost-devel,eigen,gdal,geos,hexer,iconv,libgeotiff,libpq,libtiff,libxml2,nitro,pcl,points2grid,proj,python-numpy,zlib -R %OSGEO4W_ROOT% > NUL
   # call our PDAL install script
   - call .\\scripts\\appveyor\\config.cmd
 

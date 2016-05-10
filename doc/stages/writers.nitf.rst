@@ -28,7 +28,7 @@ Example
         },
         {
           "type":"writers.nitf",
-          "compression":"laszip",
+          "compression":"true",
           "idatim":"20160102220000",
           "forward":"all",
           "acftb":"SENSOR_ID:LIDAR,SENSOR_ID_TYPE:LILN",
@@ -51,7 +51,7 @@ Example
         },
         {
           "type":"writers.nitf",
-          "compression":"laszip",
+          "compression":"true",
           "idatim":"20160102220000",
           "forward":"all",
           "acftb":"SENSOR_ID:LIDAR,SENSOR_ID_TYPE:LILN",

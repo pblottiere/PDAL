@@ -98,7 +98,7 @@ Example 2:
     $ pdal info test/data/1.2-with-color.las -p 0-10
     {
       "filename": "../../test/data/las/1.2-with-color.las",
-      "pdal_version": "PDAL 1.0.0.b1 (116d7d) with GeoTIFF 1.4.1 GDAL 1.11.2 LASzip 2.2.0",
+      "pdal_version": "PDAL 1.0.0.b1 (116d7d) with GeoTIFF 1.4.1 GDAL 1.11.2",
       "points":
       {
         "point":

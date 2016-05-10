@@ -1,7 +1,7 @@
 @echo off
  
 :: This configure script is designed for the default Windows world, which means
-:: you have OSGeo4W installed, including Oracle and GDAL and LASzip.
+:: you have OSGeo4W installed, including Oracle and GDAL.
 
 :: This configure script expects to be run from the PDAL root directory.
 
@@ -44,11 +44,6 @@ set GEOTIFF_ENABLED=ON
 set GEOTIFF_INCLUDE_DIR=%OSGEO4W_DIR%\include 
 set GEOTIFF_LIBRARY=%OSGEO4W_DIR%\lib\geotiff_i.lib 
 
-:: LASZIP
-set LASZIP_ENABLED=ON
-set LASZIP_INCLUDE_DIR=%OSGEO4W_DIR%\include
-set LASZIP_LIBRARY=%OSGEO4W_DIR%\lib\laszip.lib
-
 :: Oracle
 set ORACLE_ENABLED=ON
 set ORACLE_HOME=%OSGEO4W_DIR%
@@ -86,7 +81,6 @@ cmake -G %GENERATOR% ^
     -DWITH_GDAL=%GDAL_ENABLED% ^
     -DWITH_GEOTIFF=%GEOTIFF_ENABLED% ^
     -DWITH_ORACLE=%ORACLE_ENABLED% ^
-    -DWITH_LASZIP=%LASZIP_ENABLED% ^
     -DWITH_LIBXML2=%LIBXML2_ENABLED% ^
     -DWITH_ICONV=%ICONV_ENABLED% ^
 	-DWITH_PYTHON=%PYTHON_ENABLED% ^

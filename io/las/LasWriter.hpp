@@ -43,7 +43,6 @@
 #include "LasHeader.hpp"
 #include "LasUtils.hpp"
 #include "SummaryData.hpp"
-#include "ZipPoint.hpp"
 
 extern "C" int32_t LasWriter_ExitFunc();
 extern "C" PF_ExitFunc LasWriter_InitPlugin();
@@ -85,8 +84,6 @@ private:
     LasError m_error;
     LasHeader m_lasHeader;
     std::unique_ptr<SummaryData> m_summaryData;
-    std::unique_ptr<LASzipper> m_zipper;
-    std::unique_ptr<ZipPoint> m_zipPoint;
     std::unique_ptr<LazPerfVlrCompressor> m_compressor;
     bool m_discardHighReturnNumbers;
     std::map<std::string, std::string> m_headerVals;
@@ -144,7 +141,6 @@ private:
     bool fillPointBuf(PointRef& point, LeInserter& ostream);
     point_count_t fillWriteBuf(const PointView& view, PointId startId,
         std::vector<char>& buf);
-    void writeLasZipBuf(char *data, size_t pointLen, point_count_t numPts);
     void writeLazPerfBuf(char *data, size_t pointLen, point_count_t numPts);
     void setVlrsFromMetadata(MetadataNode& forward);
     MetadataNode findVlrMetadata(MetadataNode node, uint16_t recordId,
@@ -152,8 +148,6 @@ private:
     void setExtraBytesVlr();
     void setVlrsFromSpatialRef();
     void readyCompression();
-    void readyLasZipCompression();
-    void readyLazPerfCompression();
     void openCompression();
     void addVlr(const std::string& userId, uint16_t recordId,
         const std::string& description, std::vector<uint8_t>& data);
@@ -162,7 +156,6 @@ private:
     void addGeotiffVlr(GeotiffSupport& geotiff, uint16_t recordId,
         const std::string& description);
     bool addWktVlr();
-    void finishLasZipOutput();
     void finishLazPerfOutput();
 
     LasWriter& operator=(const LasWriter&); // not implemented

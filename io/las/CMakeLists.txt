@@ -6,13 +6,8 @@ if ((GEOTIFF_FOUND) AND (GDAL_FOUND))
     set (PDAL_DRIVERS_LAS_GTIFF GeotiffSupport.cpp)
 endif()
 
-if (LASZIP_FOUND)
-    set(PDAL_DRIVERS_LAS_LASZIP ZipPoint.cpp)
-endif()
-
 set (srcs
   ${PDAL_DRIVERS_LAS_GTIFF}
-  ${PDAL_DRIVERS_LAS_LASZIP}
   LasHeader.cpp
   LasUtils.cpp
   SummaryData.cpp
@@ -27,7 +22,6 @@ set(incs
   LasUtils.hpp
   SummaryData.hpp
   VariableLengthRecord.hpp
-  ZipPoint.hpp
 )
 
 set(objs "")

@@ -4,7 +4,6 @@ INSTALL_PREFIX=${HOME}/pdal
 
 # Where are our dependencies installed?
 TIFF_HOME=/opt/local
-LASZIP_HOME=/usr/local
 LIBXML2_HOME=/opt/local
 GEOTIFF_HOME=/opt/local
 P2G_HOME=/usr/local
@@ -28,7 +27,6 @@ cmake   -G "$CONFIG" \
         -DWITH_GDAL=ON \
         -DWITH_ORACLE=OFF \
         -DWITH_GEOTIFF=ON \
-        -DWITH_LASZIP=OFF \
         -DWITH_LIBXML2=ON \
         -DWITH_PYTHON=ON \
         -DWITH_P2G=OFF \
@@ -43,8 +41,3 @@ cmake   -G "$CONFIG" \
 	-DPOSTGRESQL_INCLUDE_DIR=${PGSQL_HOME}/include \
 	-DPOSTGRESQL_LIBRARIES=${PGSQL_HOME}/lib/libpq.${SO_EXT} \
 	../PDAL
-
-
-
-#	-DLASZIP_INCLUDE_DIR=${LASZIP_HOME}/include \
-#	-DLASZIP_LIBRARY=${LASZIP_HOME}/lib/liblaszip.${SO_EXT} \

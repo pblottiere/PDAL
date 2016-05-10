@@ -9,12 +9,10 @@ containing waveform data (4, 5, 9 and 10).
 
 The reader also supports compressed LAS files, known as LAZ files or
 `LASzip`_ files.
-In order to use compresed LAS, your version of PDAL must be built with one of
-the two supported decompressors, `LASzip`_ or `LAZperf`_.  See the
-`compression`_ option below for more information.
+In order to use compresed LAS, your version of PDAL must be built with the
+`LAZperf`_ decompressor.
 
-.. _LASzip: http://www.laszip.org
-.. _LAZperf: https://github.com/verma/laz-perf
+.. _LAZperf: https://github.com/hobu/laz-perf
 
 .. note::
 
@@ -81,9 +79,3 @@ _`extra_dims`
 .. _LAS format: http://asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html
 .. _LAS Specification: http://www.asprs.org/a/society/committees/standards/LAS_1_4_r13.pdf
 
-_`compression`
-  May be set to "lazperf" or "laszip" to choose either the LazPerf decompressor
-  or the LasZip decompressor for LAZ files.  PDAL must have been build with
-  support for the decompressor being requested.  The LazPerf decompressor
-  doesn't support version 1 LAZ files or version 1.4 of LAS.
-  [Default: "laszip"]

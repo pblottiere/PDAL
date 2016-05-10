@@ -77,4 +77,3 @@ Debian packages are now available on `Debian Unstable`_.
 
 .. _`OSGeo4W`: http://trac.osgeo.org/osgeo4w/
 .. _`Debian Unstable`: https://tracker.debian.org/pkg/pdal
-.. _`LASzip`: http://laszip.org

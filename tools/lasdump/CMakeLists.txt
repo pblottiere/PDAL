@@ -15,15 +15,8 @@ include(${ROOT_DIR}/cmake/common.cmake NO_POLICY_SCOPE)
 include_directories(${PDAL_UTIL_DIR} ${PDAL_INCLUDE_DIR})
 
 #
-# Add necessary modules.
-#
-include(${PDAL_CMAKE_DIR}/laszip.cmake)
-find_package(LASzip QUIET)
-
-#
 # Right now we don't bother if we don't have LASzip.
 #
-if (LASZIP_FOUND)
     set (SOURCES
         Dumper.cpp
         Header.cpp
@@ -44,5 +37,4 @@ if (LASZIP_FOUND)
     if (WIN32)
         target_link_libraries(lasdump wsock32 ws2_32)
     endif()
-endif()
 

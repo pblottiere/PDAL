@@ -12,7 +12,6 @@
     },
     {
       "filename":"@CMAKE_SOURCE_DIR@/test/temp/pdal-compressed.laz",
-      "compression":true,
       "format":2
     }
   ]

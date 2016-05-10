@@ -118,10 +118,11 @@ project_id
   UID reserved for the user [Default: Nil UID]
 
 compression
-  Set to "lazperf" or "laszip" to apply compression to the output, creating
-  a LAZ file instead of an LAS file.  "lazperf" selects the LazPerf compressor
-  and "laszip" (or "true") selects the LasZip compressor. PDAL must have
-  been built with support for the requested compressor.  [Default: "none"]
+  Set to "true" to apply compression to the output, creating a LAZ file
+  instead of an LAS file.  PDAL must be built with the `LAZperf`_
+  compressor when compression is requested or an error will occur.
+  For backward compatibility, the values "lazperf" and "laszip" are also
+  accepted as synonyms for "true".  [Default: "none"]
 
 scale_x, scale_y, scale_z
   Scale to be divided from the X, Y and Z nominal values, respectively, after

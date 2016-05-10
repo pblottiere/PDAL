@@ -53,7 +53,6 @@ namespace pdal
 PDAL_DLL bool IsLibLASEnabled();
 PDAL_DLL bool IsGDALEnabled();
 PDAL_DLL bool IsLibGeoTIFFEnabled();
-PDAL_DLL bool IsLasZipEnabled();
 
 PDAL_DLL std::string GetFullVersionString();
 PDAL_DLL std::string GetVersionString();
