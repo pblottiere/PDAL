@@ -161,7 +161,7 @@ RUN git clone  https://github.com/hobu/laz-perf.git \
         -DCMAKE_INSTALL_PREFIX=/usr \
         -DCMAKE_BUILD_TYPE="Release" \
         .. \
-    && make \
+    && make -j 2 \
     && make install \
     && rm -rf /laz-perf
 

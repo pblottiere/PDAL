@@ -1,4 +1,9 @@
-@echo off
+@echo on
+
+git clone https://github.com/hobu/laz-perf.git
+cd laz-perf
+cmake -G "Visual Studio 14 2015 Win64" .
+cd ..
 
 cmake -G "Visual Studio 14 2015 Win64" ^
     -DBUILD_PLUGIN_CPD=OFF ^
@@ -16,7 +21,8 @@ cmake -G "Visual Studio 14 2015 Win64" ^
     -DBUILD_PLUGIN_PYTHON=%PDAL_OPTIONAL_COMPONENTS% ^
     -DENABLE_CTEST=OFF ^
     -DWITH_APPS=ON ^
-    -DWITH_LAZPERF=%PDAL_OPTIONAL_COMPONENTS% ^
+    -DWITH_LAZPERF=ON ^
+    -DLazperf_DIR=./laz-perf ^
     -DWITH_GEOTIFF=%PDAL_OPTIONAL_COMPONENTS% ^
     -DWITH_LASZIP=%PDAL_OPTIONAL_COMPONENTS% ^
     -DWITH_TESTS=ON ^
