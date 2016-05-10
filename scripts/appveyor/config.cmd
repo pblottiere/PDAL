@@ -2,9 +2,8 @@
 
 git clone https://github.com/hobu/laz-perf.git
 cd laz-perf
-cmake -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX="%cd%/install" .
-nmake /f Makefile
-nmake /f Makefile install
+cmake -G "Visual Studio 14 2015 Win64" -DCMAKE_INSTALL_PREFIX="%cd%/install" .
+cmake --build . --target install
 cd ..
 
 cmake -G "Visual Studio 14 2015 Win64" ^
