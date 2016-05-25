@@ -1,5 +1,5 @@
 /******************************************************************************
-* Copyright (c) 2011, Michael P. Gerlek (mpg@flaxen.com)
+* Copyright (c) 2016, Hobu Inc. (info@hobu.co)
 *
 * All rights reserved.
 *
@@ -13,10 +13,9 @@
 *       notice, this list of conditions and the following disclaimer in
 *       the documentation and/or other materials provided
 *       with the distribution.
-*     * Neither the name of Hobu, Inc. or Flaxen Geo Consulting nor the
-*       names of its contributors may be used to endorse or promote
-*       products derived from this software without specific prior
-*       written permission.
+*     * Neither the name of Hobu, Inc. nor the names of its contributors
+*       may be used to endorse or promote products derived from this
+*       software without specific prior written permission.
 *
 * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -32,10 +31,51 @@
 * OF SUCH DAMAGE.
 ****************************************************************************/
 
-#include "TestConfig.hpp"
+#pragma once
 
-std::string TestConfig::g_data_path = UNITTEST_TESTCONFIG_DATA_PATH;
-std::string TestConfig::g_configured_path = UNITTEST_TESTCONFIG_CONFIGURED_PATH;
-std::string TestConfig::g_binary_path = UNITTEST_TESTCONFIG_BINARY_PATH;
-std::string TestConfig::g_oracle_connection =
-    UNITTEST_TESTCONFIG_OCI_CONNECTION;
+#include <pdal/PointView.hpp>
+
+namespace pdal
+{
+
+class ProgramArgs;
+
+/**
+  Scaling provides support for transforming X/Y/Z values from double to
+  scaled integers and vice versa.
+*/
+class PDAL_DLL Scaling
+{
+public:
+    XForm m_xXform;          ///< X-dimension transform (scale/offset)
+    XForm m_yXform;          ///< Y-dimension transform (scale/offset)
+    XForm m_zXform;          ///< Z-dimension transform (scale/offset)
+
+    /**
+       Determine if any of the transformations are non-standard.
+
+       \return  Whether any transforms are non-standard.
+    */
+    bool nonstandard() const
+    {
+        return m_xXform.nonstandard() || m_yXform.nonstandard() ||
+            m_zXform.nonstandard();
+    }
+
+    /**
+      Compute an automatic scale/offset for points in the PointView.
+
+      \param view  PointView on which scale should be computed.
+    */
+    virtual void setAutoXForm(const PointViewPtr view);
+
+    /**
+      Add option/command-line arguments for transform variables.
+
+      \param args  Argument set to add to.
+    */
+    void addArgs(ProgramArgs& args);
+};
+
+} // namespace pdal
+
