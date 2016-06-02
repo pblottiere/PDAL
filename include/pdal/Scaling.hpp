@@ -34,6 +34,7 @@
 #pragma once
 
 #include <pdal/PointView.hpp>
+#include <pdal/util/ProgramArgs.hpp>
 
 namespace pdal
 {
@@ -50,6 +51,12 @@ public:
     XForm m_xXform;          ///< X-dimension transform (scale/offset)
     XForm m_yXform;          ///< Y-dimension transform (scale/offset)
     XForm m_zXform;          ///< Z-dimension transform (scale/offset)
+    Arg *m_xOffArg;
+    Arg *m_yOffArg;
+    Arg *m_zOffArg;
+    Arg *m_xScaleArg;
+    Arg *m_yScaleArg;
+    Arg *m_zScaleArg;
 
     /**
        Determine if any of the transformations are non-standard.

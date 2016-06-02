@@ -403,8 +403,11 @@ TEST(LasReaderTest, lazperf)
     lazReader.setOptions(ops1);
 
     PointTable t1;
+std::cerr << "Preparing!\n";
     lazReader.prepare(t1);
+std::cerr << "Prepared!\n";
     PointViewSet pbSet = lazReader.execute(t1);
+std::cerr << "Executing!\n";
     EXPECT_EQ(pbSet.size(), 1UL);
     PointViewPtr view1 = *pbSet.begin();
     EXPECT_EQ(view1->size(), (point_count_t)110000);

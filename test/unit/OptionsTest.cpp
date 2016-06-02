@@ -51,24 +51,6 @@ const std::string xml_str_ref = "<Name>my_string</Name><Value>Yow.</Value><Descr
 namespace pdal
 {
 
-TEST(OptionsTest, test_static_options)
-{
-    Options ops;
-
-    FauxReader reader;
-    reader.setOptions(ops);
-
-    CropFilter crop;
-    crop.setOptions(ops);
-    crop.setInput(reader);
-    auto opts = crop.getDefaultOptions();
-    EXPECT_EQ(opts.getOptions().size(), 4u);
-    EXPECT_TRUE(opts.hasOption("bounds"));
-    EXPECT_TRUE(opts.hasOption("inside"));
-    EXPECT_TRUE(opts.hasOption("polygon"));
-    EXPECT_FALSE(opts.hasOption("metes"));
-}
-
 TEST(OptionsTest, test_option_writing)
 {
     std::ostringstream ostr_i;

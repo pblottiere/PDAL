@@ -59,6 +59,13 @@ template<> void Option::setValue(const std::string& value)
 #endif
 
 
+std::string Option::toArg() const
+{
+    return std::string(2, '-') + getName() + '=' +
+        getValue<std::string>();
+}
+
+
 void Option::toMetadata(MetadataNode& parent) const
 {
     parent.add(getName(), getValue<std::string>());
@@ -167,6 +174,24 @@ bool Options::hasOption(std::string const& name) const
     catch (Option::not_found)
     {}
     return false;
+}
+
+/**
+  Convert options to a string list appropriate for parsing with ProgramArgs.
+
+  \return  List of options as argument strings.
+*/
+StringList Options::toCommandLine() const
+{
+    StringList s;
+
+    for (const auto& op : m_options)
+    {
+        const Option& o = op.second;
+std::cerr << "Arg = " << o.toArg() << "!\n";
+        s.push_back(o.toArg());
+    }
+    return s;
 }
 
 } // namespace pdal

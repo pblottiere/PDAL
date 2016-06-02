@@ -38,6 +38,7 @@
 #include <pdal/Polygon.hpp>
 #include <pdal/StageFactory.hpp>
 #include <pdal/pdal_macros.hpp>
+#include <pdal/util/ProgramArgs.hpp>
 
 using namespace hexer;
 
@@ -51,17 +52,16 @@ static PluginInfo const s_info = PluginInfo(
 
 CREATE_SHARED_PLUGIN(1, 0, HexBin, Filter, s_info)
 
-void HexBin::processOptions(const Options& options)
+void HexBin::addArgs(ProgramArgs& args)
 {
-    m_sampleSize = options.getValueOrDefault<uint32_t>("sample_size", 5000);
-    m_density = options.getValueOrDefault<uint32_t>("threshold", 15);
-    m_outputTesselation = options.getValueOrDefault<bool>("output_tesselation", false);
-
-    if (options.hasOption("edge_length"))
-        m_edgeLength = options.getValueOrDefault<double>("edge_length", 0.0);
-    else
-        // Backward compatability.
-        m_edgeLength = options.getValueOrDefault<double>("edge_size", 0.0);
+    args.add("sample_size", "Sample size for auto-edge length calculation",
+        m_sampleSize, 5000U);
+    args.add("threshold", "Required cell density", m_density, 15);
+    args.add("output_tesselation", "Write tesselation to output metadata",
+        m_outputTesselation);
+    args.add("edge_size", "Synonym for 'edge_length' (deprecated)",
+        m_edgeLength);
+    args.add("edge_length", "Length of hex edge", m_edgeLength);
 }
 
 

@@ -92,8 +92,6 @@ public:
 
     DerivativeWriter();
 
-    Options getDefaultOptions();
-
 private:
     virtual void processOptions(const Options& ops);
     virtual void initialize();

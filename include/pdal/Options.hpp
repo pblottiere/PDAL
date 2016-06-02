@@ -48,11 +48,6 @@ namespace pdal
 class Options;
 class Option;
 
-namespace options
-{
-typedef std::multimap<std::string, Option> map_t;
-}
-
 /*!
     \verbatim embed:rst
      An Option is just a record with three fields: name, value, and description.
@@ -151,6 +146,8 @@ public:
         }
         return count;
     }
+
+    std::string toArg() const;
 
     // Make sure that the option name consists of lowercase characters or
     // underscores.
@@ -467,10 +464,10 @@ public:
     bool hasOption(std::string const& name) const;
 
     std::vector<Option> getOptions(std::string const& name="") const;
-
+    StringList toCommandLine() const;
 
 private:
-    options::map_t m_options;
+    std::multimap<std::string, Option> m_options;
 };
 typedef std::map<std::string, Options> OptionsMap;
 

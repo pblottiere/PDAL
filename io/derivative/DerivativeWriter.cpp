@@ -138,21 +138,9 @@ DerivativeWriter::generateFilename(const std::string& primName) const
 
 void DerivativeWriter::initialize()
 {
-
     setBounds(BOX2D());
 }
 
-
-Options DerivativeWriter::getDefaultOptions()
-{
-    Options options;
-
-    options.add("grid_dist_x", 15.0, "X grid distance");
-    options.add("grid_dist_y", 15.0, "Y grid distance");
-    options.add("primitive_type", "slope_d8", "Primitive type");
-
-    return options;
-}
 
 double DerivativeWriter::GetNeighbor(Eigen::MatrixXd* data, int row, int col,
     Direction d)

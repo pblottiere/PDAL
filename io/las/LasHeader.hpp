@@ -55,6 +55,7 @@ class ILeStream;
 typedef uint8_t PointFormat;
 std::string GetDefaultSoftwareId();
 class SummaryData;
+class Scaling;
 
 class PDAL_DLL LasHeader
 {
@@ -260,8 +261,8 @@ public:
     double scaleZ() const
         { return m_scales[2]; }
 
-    /// Set values of scale factor for X, Y and Z coordinates.
-    void setScale(double x, double y, double z);
+    /// Set values of scale/offset factor for X, Y and Z coordinates.
+    void setScaling(const Scaling& scaling);
 
     /// Get X coordinate offset.
     double offsetX() const
@@ -346,11 +347,11 @@ public:
     /// Returns true iff the file is compressed (laszip),
     /// as determined by the high bit in the point type
     bool compressed() const
-        { return m_isCompressed; }
+        { std::cerr << "&&& Compressed = " << (int) m_isCompressed << "!\n"; return m_isCompressed; }
 
     /// Sets whether or not the points are compressed.
     void setCompressed(bool b)
-        { m_isCompressed = b; }
+        { std::cerr << "&&& Set compressed = " << (int)b << "!\n"; m_isCompressed = b; }
 
     void setVlrCount(uint32_t vlrCount)
         { m_vlrCount = vlrCount; }

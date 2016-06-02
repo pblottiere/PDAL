@@ -64,7 +64,7 @@ TEST(PipelineManagerTest, basic)
     std::cout << "E" << std::endl;
     point_count_t np = mgr.execute();
     std::cout << "Done" << std::endl;
-    EXPECT_TRUE(np == 1065U);
+    EXPECT_EQ(np, 1065U);
 
     EXPECT_TRUE(!std::ifstream(outfile).fail());
     FileUtils::deleteFile(outfile);
