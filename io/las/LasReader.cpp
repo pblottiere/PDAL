@@ -172,13 +172,11 @@ void LasReader::initializeLocal(PointTableRef table, MetadataNode& m)
     extractVlrMetadata(forward, m);
 
     m_streamIf.reset();
-std::cerr << "Done init!\n";
 }
 
 
 void LasReader::ready(PointTableRef table)
 {
-std::cerr << "+ready()!\n";
     createStream();
     std::istream *stream(m_streamIf->m_istream);
 
@@ -231,7 +229,6 @@ std::cerr << "+ready()!\n";
     }
     else
         stream->seekg(m_header.pointOffset());
-std::cerr << "-Ready()!\n";
 }
 
 
@@ -531,7 +528,6 @@ bool LasReader::processOne(PointRef& point)
 
 point_count_t LasReader::read(PointViewPtr view, point_count_t count)
 {
-std::cerr << "Read with count = " << count << "!\n";
     size_t pointLen = m_header.pointLen();
     count = std::min(count, getNumPoints() - m_index);
 
@@ -588,7 +584,6 @@ std::cerr << "Read with count = " << count << "!\n";
         {}
     }
     m_index += i;
-std::cerr << "Done with count = " << i << "!\n";
     return (point_count_t)i;
 }
 

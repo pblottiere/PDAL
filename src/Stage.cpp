@@ -92,17 +92,12 @@ void Stage::serialize(MetadataNode root, PipelineWriter::TagMap& tags) const
 
 void Stage::handleOptions()
 {
-std::cerr << "l_addArgs!\n";
     try
     {
     l_addArgs(*m_args);
-std::cerr << "Add args!\n";
     addArgs(*m_args);
-std::cerr << "To command line!\n";
     StringList cmdline = m_options.toCommandLine();
-std::cerr << "Parse!\n";
     m_args->parse(cmdline);
-std::cerr << "Done parse!\n";
     }
     catch (arg_error error)
     {
@@ -334,9 +329,7 @@ void Stage::l_addArgs(ProgramArgs& args)
     args.add("debug", "Debug on/off", m_debug);
     args.add("verbose", "Debug output level", m_verbose, 0U);
     args.add("log", "Debug output filename", m_logname);
-std::cerr << "Reader add args!\n";
     readerAddArgs(args);
-std::cerr << "Writer add args!\n";
     writerAddArgs(args);
 }
 

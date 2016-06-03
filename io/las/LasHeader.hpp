@@ -347,11 +347,11 @@ public:
     /// Returns true iff the file is compressed (laszip),
     /// as determined by the high bit in the point type
     bool compressed() const
-        { std::cerr << "&&& Compressed = " << (int) m_isCompressed << "!\n"; return m_isCompressed; }
+        { return m_isCompressed; }
 
     /// Sets whether or not the points are compressed.
     void setCompressed(bool b)
-        { std::cerr << "&&& Set compressed = " << (int)b << "!\n"; m_isCompressed = b; }
+        { m_isCompressed = b; }
 
     void setVlrCount(uint32_t vlrCount)
         { m_vlrCount = vlrCount; }
