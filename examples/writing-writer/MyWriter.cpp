@@ -33,7 +33,7 @@ namespace pdal
   };
 
 
-  void MyWriter::processOptions(const Options& options)
+  void MyWriter::addArgs(ProgramArgs& args)
   {
     // setPositional() Makes the argument required.
     args.add("filename", "Output filename", m_filename).setPositional();  
