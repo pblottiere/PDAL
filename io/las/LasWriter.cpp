@@ -115,7 +115,11 @@ void LasWriter::addArgs(ProgramArgs& args)
 
 void LasWriter::initialize()
 {
-std::cerr << "Compression = " << (int)m_compression << "!\n";
+    std::string ext = FileUtils::extension(m_filename);
+    ext = Utils::tolower(ext);
+    if ((ext == ".laz") && (m_compression == LasCompression::None))
+        m_compression = LasCompression::LasZip;
+
     if (!m_aSrs.empty())
         setSpatialReference(m_aSrs);
     if (m_compression != LasCompression::None)
@@ -262,12 +266,8 @@ void LasWriter::prepOutput(std::ostream *outStream, const SpatialReference& srs)
 
     m_summaryData.reset(new SummaryData());
     m_ostream = outStream;
-std::cerr << "Compression = " << (int)m_compression << "!\n";
     if (m_lasHeader.compressed())
-{
-        std::cerr << "Ready compression!\n";
         readyCompression();
-}
 
     // Compression should cause the last of the VLRs to get filled.  We now
     // have a valid count, so fill the header again.
@@ -504,7 +504,6 @@ void LasWriter::handleHeaderForward(const std::string& s, T& headerVal,
 {
     if (Utils::contains(m_forwards, s) && !headerVal.valSet())
     {
-std::cerr << "Found forward = " << s << "!\n";
         MetadataNode invalid = base.findChild(s + "INVALID");
         MetadataNode m = base.findChild(s);
         if (!invalid.valid() && m.valid())
@@ -912,7 +911,6 @@ void LasWriter::finishOutput()
 
     out.seek(0);
     out << m_lasHeader;
-    std::cerr << "*** Offset = " << (int)m_lasHeader.pointOffset() << "!\n";
     out.seek(m_lasHeader.pointOffset());
 
     m_ostream->flush();

@@ -229,7 +229,7 @@ Stage& PipelineManager::makeWriter(const std::string& outputFile,
                 outputFile);
     }
 
-    Options options = StageFactory::inferWriterOptionsChanges(outputFile);
+    Options options;
     if (!outputFile.empty())
         options.add("filename", outputFile);
 
