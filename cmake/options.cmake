@@ -37,6 +37,11 @@ option(BUILD_PLUGIN_MATLAB
 add_feature_info("Matlab plugin" BUILD_PLUGIN_MATLAB
     "write data to a .mat file")
 
+ option(BUILD_PLUGIN_MIDOC
+    "Choose to build midoc algorithm filter" FALSE)
+add_feature_info("Midoc plugin" BUILD_PLUGIN_MIDOC
+    "filters points according to midoc algorithm")
+
 option(BUILD_PLUGIN_MRSID
     "Choose if MrSID/LiDAR support should be built" FALSE)
 add_feature_info("MrSID plugin" BUILD_PLUGIN_MRSID
