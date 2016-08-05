@@ -27,6 +27,10 @@ if(BUILD_PLUGIN_MATLAB)
     add_subdirectory(matlab)
 endif()
 
+if(BUILD_PLUGIN_MIDOC)
+    add_subdirectory(midoc)
+endif()
+
 if(BUILD_PLUGIN_MRSID)
     add_subdirectory(mrsid)
 endif()
