@@ -98,8 +98,21 @@ void MidocFilter::midoc(const BOX2D &box,
     double centerx = box.minx + (box.maxx - box.minx)/2;
     double centery = box.miny + (box.maxy - box.miny)/2;
 
+    std::vector<BOX2D> boxes;
+    split(box, boxes);
+    std::vector<std::vector<PointId>> split_dataset;
+    for ( size_t i = 0; i < boxes.size(); i++ )
+    {
+        std::vector<PointId> data;
+        split_dataset.push_back(data);
+    }
+
+    bool found = false;
+    int boxnumber = -1;
+    int boxindex = -1;
     for ( size_t j = 0; j < dataset.size(); j++)
     {
+        found = false;
         PointId idx = dataset[j];
         double x = view->getFieldAs<double>(Dimension::Id::X, idx);
         double y = view->getFieldAs<double>(Dimension::Id::Y, idx);
@@ -114,6 +127,23 @@ void MidocFilter::midoc(const BOX2D &box,
             {
                 mindist = dist;
                 index = j;
+                found = true;
+            }
+        }
+
+        for ( size_t i = 0; i < boxes.size(); i++ )
+        {
+            if (boxes[i].contains(x,y))
+            {
+                split_dataset[i].push_back(idx);
+
+                if (found)
+                {
+                    boxnumber = i;
+                    boxindex = split_dataset[i].size()-1;
+                }
+
+                break;
             }
         }
     }
@@ -122,16 +152,15 @@ void MidocFilter::midoc(const BOX2D &box,
     {
         sorted.insert( std::pair<int, PointId>(level, dataset[index]) );
         dataset.erase(dataset.begin()+index);
+        split_dataset[boxnumber].erase(split_dataset[boxnumber].begin()+boxindex);
     }
 
     if (dataset.size() > 0 && index != -1)
     {
-        std::vector<BOX2D> boxes;
-        split(box, boxes);
         int next_level = level+1;
 
         for ( size_t i = 0; i < boxes.size(); i++ )
-            midoc(boxes[i], next_level, view, dataset, sorted);
+            midoc(boxes[i], next_level, view, split_dataset[i], sorted);
     }
 }
 
