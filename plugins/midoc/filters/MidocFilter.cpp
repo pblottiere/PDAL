@@ -152,6 +152,10 @@ void MidocFilter::midoc(const BOX2D &box,
     {
         sorted.insert( std::pair<int, PointId>(level, dataset[index]) );
         dataset.erase(dataset.begin()+index);
+    }
+
+    if ( boxindex != -1 )
+    {
         split_dataset[boxnumber].erase(split_dataset[boxnumber].begin()+boxindex);
     }
 
