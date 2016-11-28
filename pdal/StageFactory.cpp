@@ -88,6 +88,7 @@
 #include <io/TerrasolidReader.hpp>
 #include <io/TextReader.hpp>
 #include <io/TIndexReader.hpp>
+#include <io/E57Reader.hpp>
 
 // writers
 #include <io/BpfWriter.hpp>
@@ -117,6 +118,7 @@ StringList StageFactory::extensions(const std::string& driver)
         { "readers.las", { "las", "laz" } },
         { "readers.nitf", { "nitf", "nsf", "ntf" } },
         { "readers.pcd", { "pcd" } },
+        { "readers.e57", { "e57" } },
         { "readers.ply", { "ply" } },
         { "readers.pts", { "pts" } },
         { "readers.qfit", { "qi" } },
@@ -151,6 +153,7 @@ std::string StageFactory::inferReaderDriver(const std::string& filename)
         { "bin", "readers.terrasolid" },
         { "bpf", "readers.bpf" },
         { "csd", "readers.optech" },
+        { "e57", "readers.e57" },
         { "greyhound", "readers.greyhound" },
         { "icebridge", "readers.icebridge" },
         { "las", "readers.las" },
@@ -275,6 +278,7 @@ StageFactory::StageFactory(bool no_plugins)
 
     // readers
     PluginManager::initializePlugin(BpfReader_InitPlugin);
+    PluginManager::initializePlugin(E57Reader_InitPlugin);
     PluginManager::initializePlugin(FauxReader_InitPlugin);
     PluginManager::initializePlugin(GDALReader_InitPlugin);
     PluginManager::initializePlugin(Ilvis2Reader_InitPlugin);

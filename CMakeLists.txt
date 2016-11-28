@@ -119,6 +119,7 @@ include(${PDAL_CMAKE_DIR}/curl.cmake)
 if (CURL_FOUND)
     set(PDAL_ARBITER_LIB_NAME pdal_arbiter)
 endif()
+set(PDAL_E57_LIB_NAME pdal_e57)
 include(${PDAL_CMAKE_DIR}/rply.cmake)
 include(${PDAL_CMAKE_DIR}/json.cmake)
 include(${PDAL_CMAKE_DIR}/libxml2.cmake)
@@ -147,6 +148,7 @@ endif()
 set(pdal_defines_h_in "${CMAKE_CURRENT_SOURCE_DIR}/pdal_defines.h.in")
 set(pdal_defines_h "${CMAKE_CURRENT_BINARY_DIR}/include/pdal/pdal_defines.h")
 configure_file(${pdal_defines_h_in} ${pdal_defines_h})
+include_directories(${PDAL_VENDOR_DIR}/e57)
 
 #------------------------------------------------------------------------------
 # subdirectory controls
@@ -161,7 +163,7 @@ endif()
 
 add_subdirectory(plugins)
 
-#include_directories(vendor/pdalboost)
+include_directories(vendor/pdalboost)
 if (WITH_TESTS)
     include (${PDAL_CMAKE_DIR}/gtest.cmake)
     add_subdirectory(test)
@@ -169,7 +171,7 @@ endif()
 add_subdirectory(dimbuilder)
 add_subdirectory(vendor/pdalboost)
 add_subdirectory(vendor/arbiter)
-
+add_subdirectory(vendor/e57)
 if (NOT PDAL_HAVE_JSONCPP)
     add_subdirectory(vendor/jsoncpp/dist)
 endif()

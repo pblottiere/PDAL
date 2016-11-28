@@ -17,7 +17,7 @@ else (APPLE AND PDAL_BUNDLE)
     add_executable(${PDAL_APP} pdal.cpp)
 endif(APPLE AND PDAL_BUNDLE)
 target_link_libraries(${PDAL_APP} PRIVATE
-    ${PDAL_BASE_LIB_NAME} ${PDAL_UTIL_LIB_NAME})
+    ${PDAL_BASE_LIB_NAME} ${PDAL_UTIL_LIB_NAME} ${PDAL_E57_LIB_NAME})
 target_include_directories(${PDAL_APP} PRIVATE
     ${PDAL_JSONCPP_INCLUDE_DIR}
     ${PDAL_INCLUDE_DIR}
