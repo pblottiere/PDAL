@@ -132,6 +132,7 @@ macro(PDAL_ADD_PLUGIN _name _type _shortname)
         ${PDAL_BASE_LIB_NAME}
         ${PDAL_UTIL_LIB_NAME}
         SDL2
+        ${PDAL_E57_LIB_NAME}
         ${PDAL_ADD_PLUGIN_LINK_WITH})
 
     set_property(TARGET ${${_name}} PROPERTY FOLDER "Plugins/${_type}")
@@ -180,7 +181,7 @@ macro(PDAL_ADD_TEST _name)
             COMPILE_DEFINITIONS PDAL_DLL_IMPORT)
     set_property(TARGET ${_name} PROPERTY FOLDER "Tests")
     target_link_libraries(${_name} PRIVATE
-      ${PDAL_BASE_LIB_NAME} ${PDAL_UTIL_LIB_NAME} SDL2 gtest
+      ${PDAL_BASE_LIB_NAME} ${PDAL_UTIL_LIB_NAME} ${PDAL_E57_LIB_NAME} SDL2 gtest
         ${PDAL_ADD_TEST_LINK_WITH})
     add_test(NAME ${_name}
         COMMAND
