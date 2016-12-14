@@ -71,6 +71,11 @@ option(BUILD_PLUGIN_SQLITE
 add_feature_info("SQLite plugin" BUILD_PLUGIN_SQLITE
     "read/write SQLite objects")
 
+option(BUILD_PLUGIN_REVERTMORTON
+    "Choose to build revert Morton algorithm filter" FALSE)
+add_feature_info("RevertMorton plugin" BUILD_PLUGIN_REVERTMORTON
+    "filters points according to revert Morton algorithm")
+
 option(BUILD_PLUGIN_RIVLIB
     "Choose if RiVLib support should be built" FALSE)
 add_feature_info("RiVLib plugin" BUILD_PLUGIN_RIVLIB
