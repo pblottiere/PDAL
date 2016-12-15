@@ -115,8 +115,7 @@ PointViewSet RevertMortonFilter::run(PointViewPtr view)
     double cell_height = yrange / cell;
 
     // compute revert morton code for each point
-
-    std::map<uint32_t, PointId> codes;
+    std::multimap<uint32_t, PointId> codes;
     for (PointId idx = 0; idx < view->size(); idx++)
     {
         int32_t xpos = floor( (view->getFieldAs<double>(Dimension::Id::X, idx) -
@@ -125,11 +124,11 @@ PointViewSet RevertMortonFilter::run(PointViewPtr view)
             buffer_bounds.miny) / cell_height ) ;
 
         uint32_t code = revert_morton( encode_morton(xpos, ypos) );
-        codes[code] = idx;
+        codes.insert( std::pair<uint32_t, PointId>(code, idx) );
     }
 
     // a map is yet order by key so its naturally ordered by lod
-    std::map<uint32_t, PointId>::iterator it;
+    std::multimap<uint32_t, PointId>::iterator it;
     PointViewPtr outview = view->makeNew();
     for( it = codes.begin(); it != codes.end(); ++it)
         outview->appendPoint(*view, it->second);
