@@ -46,6 +46,8 @@
 #include <iterator>
 #include <memory>
 
+#include <chrono>
+
 namespace pdal
 {
 
@@ -181,11 +183,21 @@ PointViewSet Stage::execute(PointTableRef table)
     // Do the ready operation and then start running all the views
     // through the stage.
     ready(table);
+    auto t1 = std::chrono::steady_clock::now();
     for (auto const& it : views)
     {
         StageRunnerPtr runner(new StageRunner(this, it));
         runners.push_back(runner);
+
         runner->run();
+
+
+    }
+
+    if (isDebug()) {
+        auto t2 = std::chrono::steady_clock::now();
+        auto time_span = std::chrono::duration_cast<std::chrono::duration<double>>(t2 - t1);
+        std::cout << "Stage '" << getName() << "': " << time_span.count() << " s" << std::endl;
     }
 
     // As the stages complete (synchronously at this time), propagate the
