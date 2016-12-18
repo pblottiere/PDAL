@@ -197,6 +197,7 @@ endif()
 file(GLOB BASE_SRCS
     ${PDAL_FILTERS_DIR}/*.cpp
     ${PDAL_IO_DIR}/*.cpp
+    ${PDAL_IO_DIR}/*.c
     ${PDAL_KERNELS_DIR}/*.cpp
     ${PDAL_SRC_DIR}/*.cpp)
 file(GLOB_RECURSE PRIVATE_SRCS
