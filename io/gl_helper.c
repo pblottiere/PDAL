@@ -147,6 +147,7 @@ void* init_graphics() {
         void main()
         {
             color = vec4(f_color, 1.f);
+            //color = vec4(1.0, 0.0, 0.0, 1.0);
         }
         );
 

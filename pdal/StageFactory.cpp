@@ -92,6 +92,7 @@
 // writers
 #include <io/BpfWriter.hpp>
 #include <io/GDALWriter.hpp>
+#include <io/GLWriter.hpp>
 #include <io/LasWriter.hpp>
 #include <io/PlyWriter.hpp>
 #include <io/SbetWriter.hpp>
@@ -252,6 +253,7 @@ StageFactory::StageFactory(bool no_plugins)
     PluginManager::initializePlugin(EigenvaluesFilter_InitPlugin);
     PluginManager::initializePlugin(EstimateRankFilter_InitPlugin);
     PluginManager::initializePlugin(FerryFilter_InitPlugin);
+    PluginManager::initializePlugin(GLFilter_InitPlugin);
     PluginManager::initializePlugin(GroupByFilter_InitPlugin);
     PluginManager::initializePlugin(HAGFilter_InitPlugin);
     PluginManager::initializePlugin(IQRFilter_InitPlugin);
@@ -285,6 +287,7 @@ StageFactory::StageFactory(bool no_plugins)
     PluginManager::initializePlugin(OptechReader_InitPlugin);
     PluginManager::initializePlugin(PlyReader_InitPlugin);
     PluginManager::initializePlugin(PtsReader_InitPlugin);
+    PluginManager::initializePlugin(GLWriter_InitPlugin);
     PluginManager::initializePlugin(QfitReader_InitPlugin);
     PluginManager::initializePlugin(SbetReader_InitPlugin);
     PluginManager::initializePlugin(TerrasolidReader_InitPlugin);
