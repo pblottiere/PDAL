@@ -71,6 +71,7 @@ private:
     double m_length;
     double m_xOrigin;
     double m_yOrigin;
+    double m_zOrigin;
     std::map<Coord, PointViewPtr, CoordCompare> m_viewMap;
 
     virtual void addArgs(ProgramArgs& args);

@@ -78,6 +78,8 @@ PointViewSet SplitterFilter::run(PointViewPtr inView)
         m_xOrigin = inView->getFieldAs<double>(Dimension::Id::X, 0);
     if (m_yOrigin != m_yOrigin)
         m_yOrigin = inView->getFieldAs<double>(Dimension::Id::Y, 0);
+    if (m_zOrigin != m_zOrigin)
+        m_zOrigin = inView->getFieldAs<double>(Dimension::Id::Z, 0);
     // Overlay a grid of squares on the points (m_length sides).  Each square
     // corresponds to a new point buffer.  Place the points falling in the
     // each square in the corresponding point buffer.
@@ -95,7 +97,14 @@ PointViewSet SplitterFilter::run(PointViewPtr inView)
         if (y < 0)
             ypos--;
 
-        Coord loc(xpos, ypos);
+        double z = inView->getFieldAs<double>(Dimension::Id::Z, idx);
+        z -= m_zOrigin;
+        int zpos = z / m_length;
+        if (z < 0)
+            zpos--;
+
+        Coord loc(xpos * zpos, ypos * zpos);
+        //Coord loc(xpos, ypos);
         PointViewPtr& outView = m_viewMap[loc];
         if (!outView)
             outView = inView->makeNew();
