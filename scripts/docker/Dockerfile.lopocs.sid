@@ -1,0 +1,98 @@
+FROM debian:sid
+MAINTAINER Paul Blottiere <paul.blottiere@oslandia.com>
+
+RUN apt-get update && apt-get install -y \
+        build-essential \
+        ca-certificates \
+        cmake \
+        curl \
+        git \
+        libarmadillo-dev \
+        libarpack2-dev \
+        libflann-dev \
+        libhdf5-serial-dev \
+        libtiff5-dev \
+        automake \
+        libtool \
+        libhdf5-dev \
+        libjsoncpp-dev \
+        libboost-all-dev \
+        clang \
+        clang-3.8 \
+        libproj-dev \
+        libc6-dev \
+        libnetcdf-dev \
+        libgdal-dev \
+        libpng-dev \
+        libjpeg-dev \
+        libgif-dev \
+        libwebp-dev \
+        libhdf4-alt-dev \
+        libhdf5-dev \
+        libpq-dev \
+        unixodbc-dev \
+        libgeos-dev \
+        libltdl-dev \
+        libcurl4-openssl-dev \
+        libdap-dev\
+        gdal-bin \
+        libhpdf-dev \
+        libgeos++-dev
+
+RUN git clone https://github.com/LASzip/LASzip.git laszip \
+    && cd laszip \
+    && git checkout e7065cbc5bdbbe0c6e50c9d93d1cd346e9be6778 \
+    && mkdir build \
+    && cd build \
+    && cmake \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_BUILD_TYPE="Release" \
+        .. \
+    && make \
+    && make install
+
+RUN git clone  https://github.com/hobu/laz-perf.git \
+    && cd laz-perf \
+    && mkdir build \
+    && cd build \
+    && cmake \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_BUILD_TYPE="Release" \
+        .. \
+    && make \
+    && make install
+
+RUN git clone https://github.com/pblottiere/PDAL \
+    && cd PDAL \
+    && git checkout lopocs \
+    && mkdir build \
+    && cd build \
+    && cmake \
+        -DBUILD_PLUGIN_CPD=OFF \
+        -DBUILD_PLUGIN_GREYHOUND=OFF \
+        -DBUILD_PLUGIN_HEXBIN=OFF \
+        -DBUILD_PLUGIN_ICEBRIDGE=OFF \
+        -DBUILD_PLUGIN_MRSID=OFF \
+        -DBUILD_PLUGIN_NITF=OFF \
+        -DBUILD_PLUGIN_OCI=OFF \
+        -DBUILD_PLUGIN_PCL=OFF \
+        -DBUILD_PLUGIN_PGPOINTCLOUD=ON \
+        -DBUILD_PLUGIN_SQLITE=OFF \
+        -DBUILD_PLUGIN_RIVLIB=OFF \
+        -DBUILD_PLUGIN_PYTHON=OFF \
+        -DBUILD_PLUGIN_REVERTMORTON=ON \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DENABLE_CTEST=OFF \
+        -DWITH_APPS=ON \
+        -DWITH_LAZPERF=ON \
+        -DWITH_LASZIP=ON \
+        -DWITH_TESTS=ON \
+        -DCMAKE_BUILD_TYPE=Release \
+        .. \
+    && cpack -V -G DEB \
+             -D CPACK_PACKAGE_CONTACT="Paul Blottiere <paul.blottiere@oslandia.com>" \
+             -D CPACK_DEBIAN_PACKAGE_SHLIBDEPS=ON \
+             -D CPACK_PACKAGE_FILE_NAME=pdal-lopocs-0.1-sid \
+             .. \
+    && ls
+
