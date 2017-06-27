@@ -64,6 +64,7 @@
 #include <filters/OverlayFilter.hpp>
 #include <filters/PMFFilter.hpp>
 #include <filters/RadialDensityFilter.hpp>
+#include <filters/RandomizeFilter.hpp>
 #include <filters/RangeFilter.hpp>
 #include <filters/ReprojectionFilter.hpp>
 #include <filters/SampleFilter.hpp>
@@ -265,6 +266,7 @@ StageFactory::StageFactory(bool no_plugins)
     PluginManager::initializePlugin(PMFFilter_InitPlugin);
     PluginManager::initializePlugin(RadialDensityFilter_InitPlugin);
     PluginManager::initializePlugin(RangeFilter_InitPlugin);
+    PluginManager::initializePlugin(RandomizeFilter_InitPlugin);
     PluginManager::initializePlugin(ReprojectionFilter_InitPlugin);
     PluginManager::initializePlugin(SampleFilter_InitPlugin);
     PluginManager::initializePlugin(SMRFilter_InitPlugin);
