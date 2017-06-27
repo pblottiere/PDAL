@@ -13,24 +13,24 @@ Download
 Current Release(s)
 ------------------------------------------------------------------------------
 
-* **2016-12-15** `PDAL-1.4.0-src.tar.gz`_ `Release Notes`_ (`md5`_)
+* **2017-04-06** `PDAL-1.5.0-src.tar.gz`_ `Release Notes`_ (`md5`_)
 
-.. _`Release Notes`: https://github.com/PDAL/PDAL/releases/tag/1.4.0
+.. _`Release Notes`: https://github.com/PDAL/PDAL/releases/tag/1.5.0
 
-.. _`PDAL-1.4.0-src.tar.gz`: http://download.osgeo.org/pdal/PDAL-1.4.0-src.tar.gz
-.. _`md5`: http://download.osgeo.org/pdal/PDAL-1.4.0-src.tar.gz.md5
+.. _`PDAL-1.5.0-src.tar.gz`: http://download.osgeo.org/pdal/PDAL-1.5.0-src.tar.gz
+.. _`md5`: http://download.osgeo.org/pdal/PDAL-1.5.0-src.tar.gz.md5
 .. _`DebianGIS`: http://wiki.debian.org/DebianGis
 
 
 Past Releases
 ------------------------------------------------------------------------------
 
-* **2016-08-29** `PDAL-1.3.0-src.tar.gz`_ `Release Notes`_
-* **2016-03-31** `PDAL-1.2.0-src.tar.gz`_ `Release Notes`_
+* **2016-12-15** `PDAL-1.4.0-src.tar.gz`_
+* **2016-08-29** `PDAL-1.3.0-src.tar.gz`_
 
 
+.. _`PDAL-1.4.0-src.tar.gz`: http://download.osgeo.org/pdal/PDAL-1.4.0-src.tar.gz
 .. _`PDAL-1.3.0-src.tar.gz`: http://download.osgeo.org/pdal/PDAL-1.3.0-src.tar.gz
-.. _`PDAL-1.2.0-src.tar.gz`: http://download.osgeo.org/pdal/PDAL-1.2.0-src.tar.gz
 
 
 
@@ -54,7 +54,7 @@ Docker
 ................................................................................
 
 The fastest way to get going with PDAL is to use the Docker build. See the
-tutorial at :ref:`docker` for more information.
+:ref:`Docker tutorial <docker>` for more information.
 
 ::
 
@@ -64,9 +64,9 @@ tutorial at :ref:`docker` for more information.
 Windows
 ................................................................................
 
-Windows users are asked to use the :ref:`docker` builds for :ref:`apps` access,
-otherwise, a call for help with building current Windows PDAL builds is at
-https://lists.osgeo.org/pipermail/pdal/2016-November/001089.html
+Windows builds are available via `OSGeo4W`_ (64-bit only). Run the
+``osgeo4w-setup.exe`` and choose the "Advanced Install" option. PDAL is
+available in the Commandline_Utilities or Libs section.
 
 RPMs
 ................................................................................

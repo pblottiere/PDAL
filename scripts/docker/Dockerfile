@@ -6,6 +6,8 @@ ENV CXX g++
 
 RUN apt-get update && apt-get install -y --fix-missing --no-install-recommends \
         libhpdf-dev \
+        python-all-dev \
+        python-numpy \
     libsqlite3-mod-spatialite \
     && rm -rf /var/lib/apt/lists/*
 
@@ -15,7 +17,8 @@ RUN git clone --depth=1 https://github.com/PDAL/PDAL \
     && mkdir build \
     && cd build \
     && cmake \
-        -DBUILD_PLUGIN_CPD=OFF \
+        -DBUILD_PLUGIN_CPD=ON \
+        -DBUILD_PLUGIN_MBIO=ON \
         -DBUILD_PLUGIN_GREYHOUND=ON \
         -DBUILD_PLUGIN_HEXBIN=ON \
         -DBUILD_PLUGIN_ICEBRIDGE=ON \
@@ -76,8 +79,6 @@ RUN apt-get purge -y \
     liblapack-dev \
     libtiff5-dev \
     openssh-client \
-    python-dev \
-    python-numpy \
     python-software-properties \
     software-properties-common \
     wget \
@@ -114,8 +115,7 @@ RUN apt-get purge -y \
     libcurl4-openssl-dev \
     libspatialite-dev \
     libdap-dev\
-    cython \
-    python-pip
+    cython
 
 RUN apt-get autoremove -y
 
@@ -172,5 +172,7 @@ RUN apt-get update && apt-get install -y \
     libpcl-segmentation1.7 \
     libpcl-surface1.7 \
     libpcl-tracking1.7 \
-    libpcl-visualization1.7
+    libpcl-visualization1.7 \
+    python-all-dev \
+    python-pip
 

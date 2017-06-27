@@ -28,14 +28,14 @@ mark_as_advanced(CMAKE_VERBOSE_MAKEFILE)
 
 # the next line is the ONLY place in the entire pdal system where
 # the version info is hard-coded
-set(PDAL_VERSION_STRING "1.4.0" CACHE STRING "PDAL version" FORCE)
+set(PDAL_VERSION_STRING "1.5.0" CACHE STRING "PDAL version" FORCE)
 
 DISSECT_VERSION()
 GET_OS_INFO()
 SET_INSTALL_DIRS()
 
 set(PDAL_API_VERSION "4")
-set(PDAL_BUILD_VERSION "5.0.0")
+set(PDAL_BUILD_VERSION "5.1.0")
 
 # Name of C++ library
 
@@ -64,7 +64,11 @@ set(CMAKE_INCLUDE_DIRECTORIES_PROJECT_BEFORE ON)
 
 set(PDAL_OUTPUT_LIB_DIR "${PDAL_BINARY_DIR}/${PDAL_LIB_INSTALL_DIR}")
 set(PDAL_OUTPUT_BIN_DIR "${PDAL_BINARY_DIR}/${PDAL_BIN_INSTALL_DIR}")
-set(PDAL_PLUGIN_INSTALL_PATH "${CMAKE_INSTALL_PREFIX}/${PDAL_LIB_INSTALL_DIR}")
+
+# allow override of PDAL_PLUGIN_INSTALL_PATH path
+if (NOT PDAL_PLUGIN_INSTALL_PATH)
+    set(PDAL_PLUGIN_INSTALL_PATH "${CMAKE_INSTALL_PREFIX}/${PDAL_LIB_INSTALL_DIR}")
+endif()
 file(MAKE_DIRECTORY "${PDAL_OUTPUT_LIB_DIR}")
 file(MAKE_DIRECTORY "${PDAL_OUTPUT_BIN_DIR}")
 
@@ -119,7 +123,6 @@ include(${PDAL_CMAKE_DIR}/curl.cmake)
 if (CURL_FOUND)
     set(PDAL_ARBITER_LIB_NAME pdal_arbiter)
 endif()
-include(${PDAL_CMAKE_DIR}/rply.cmake)
 include(${PDAL_CMAKE_DIR}/json.cmake)
 include(${PDAL_CMAKE_DIR}/libxml2.cmake)
 include(${PDAL_CMAKE_DIR}/dimension.cmake)

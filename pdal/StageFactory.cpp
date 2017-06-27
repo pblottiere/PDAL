@@ -47,10 +47,13 @@
 #include <filters/DecimationFilter.hpp>
 #include <filters/DividerFilter.hpp>
 #include <filters/EigenvaluesFilter.hpp>
+#include <filters/ELMFilter.hpp>
 #include <filters/EstimateRankFilter.hpp>
 #include <filters/FerryFilter.hpp>
+#include <filters/GreedyProjection.hpp>
 #include <filters/GroupByFilter.hpp>
 #include <filters/HAGFilter.hpp>
+#include <filters/HeadFilter.hpp>
 #include <filters/IQRFilter.hpp>
 #include <filters/KDistanceFilter.hpp>
 #include <filters/LocateFilter.hpp>
@@ -72,7 +75,10 @@
 #include <filters/SortFilter.hpp>
 #include <filters/SplitterFilter.hpp>
 #include <filters/StatsFilter.hpp>
+#include <filters/TailFilter.hpp>
 #include <filters/TransformationFilter.hpp>
+#include <filters/VoxelCenterNearestNeighborFilter.hpp>
+#include <filters/VoxelCentroidNearestNeighborFilter.hpp>
 
 // readers
 #include <io/BpfReader.hpp>
@@ -126,7 +132,7 @@ StringList StageFactory::extensions(const std::string& driver)
         { "readers.sqlite", { "sqlite" } },
         { "readers.mrsid", { "sid" } },
         { "readers.tindex", { "tindex" } },
-        { "readers.text", { "txt" } },
+        { "readers.text", { "csv", "txt" } },
         { "readers.icebridge", { "h5" } },
 
         { "writers.bpf", { "bpf" } },
@@ -152,6 +158,7 @@ std::string StageFactory::inferReaderDriver(const std::string& filename)
         { "bin", "readers.terrasolid" },
         { "bpf", "readers.bpf" },
         { "csd", "readers.optech" },
+        { "csv", "readers.text" },
         { "greyhound", "readers.greyhound" },
         { "icebridge", "readers.icebridge" },
         { "las", "readers.las" },
@@ -248,10 +255,13 @@ StageFactory::StageFactory(bool no_plugins)
     PluginManager::initializePlugin(DecimationFilter_InitPlugin);
     PluginManager::initializePlugin(DividerFilter_InitPlugin);
     PluginManager::initializePlugin(EigenvaluesFilter_InitPlugin);
+    PluginManager::initializePlugin(ELMFilter_InitPlugin);
     PluginManager::initializePlugin(EstimateRankFilter_InitPlugin);
     PluginManager::initializePlugin(FerryFilter_InitPlugin);
+    PluginManager::initializePlugin(GreedyProjection_InitPlugin);
     PluginManager::initializePlugin(GroupByFilter_InitPlugin);
     PluginManager::initializePlugin(HAGFilter_InitPlugin);
+    PluginManager::initializePlugin(HeadFilter_InitPlugin);
     PluginManager::initializePlugin(IQRFilter_InitPlugin);
     PluginManager::initializePlugin(KDistanceFilter_InitPlugin);
     PluginManager::initializePlugin(LocateFilter_InitPlugin);
@@ -265,6 +275,7 @@ StageFactory::StageFactory(bool no_plugins)
     PluginManager::initializePlugin(OverlayFilter_InitPlugin);
     PluginManager::initializePlugin(PMFFilter_InitPlugin);
     PluginManager::initializePlugin(RadialDensityFilter_InitPlugin);
+    PluginManager::initializePlugin(RandomizeFilter_InitPlugin);
     PluginManager::initializePlugin(RangeFilter_InitPlugin);
     PluginManager::initializePlugin(RandomizeFilter_InitPlugin);
     PluginManager::initializePlugin(ReprojectionFilter_InitPlugin);
@@ -273,7 +284,10 @@ StageFactory::StageFactory(bool no_plugins)
     PluginManager::initializePlugin(SortFilter_InitPlugin);
     PluginManager::initializePlugin(SplitterFilter_InitPlugin);
     PluginManager::initializePlugin(StatsFilter_InitPlugin);
+    PluginManager::initializePlugin(TailFilter_InitPlugin);
     PluginManager::initializePlugin(TransformationFilter_InitPlugin);
+    PluginManager::initializePlugin(VoxelCenterNearestNeighborFilter_InitPlugin);
+    PluginManager::initializePlugin(VoxelCentroidNearestNeighborFilter_InitPlugin);
 
     // readers
     PluginManager::initializePlugin(BpfReader_InitPlugin);

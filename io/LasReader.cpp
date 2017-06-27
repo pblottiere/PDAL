@@ -454,11 +454,14 @@ void LasReader::extractVlrMetadata(MetadataNode& forward, MetadataNode& m)
             "Record ID specified by the user.");
         vlrNode.add("description", vlr.description());
 
-        if ((vlr.userId() != TRANSFORM_USER_ID) &&
-            (vlr.userId() != SPEC_USER_ID) &&
-            (vlr.userId() != LASZIP_USER_ID) &&
-            (vlr.userId() != LIBLAS_USER_ID))
-            forward.add(vlrNode);
+        if (vlr.userId() == TRANSFORM_USER_ID||
+            vlr.userId() == LASZIP_USER_ID ||
+            vlr.userId() == LIBLAS_USER_ID)
+            continue;
+        if (vlr.userId() == SPEC_USER_ID &&
+            vlr.recordId() != 0 && vlr.recordId() != 3)
+            continue;
+        forward.add(vlrNode);
     }
 }
 
@@ -503,7 +506,7 @@ void LasReader::addDimensions(PointLayoutPtr layout)
             continue;
         if (dim.m_dimType.m_xform.nonstandard())
             type = Dimension::Type::Double;
-        dim.m_dimType.m_id = layout->assignDim(dim.m_name, type);
+        dim.m_dimType.m_id = layout->registerOrAssignDim(dim.m_name, type);
     }
 }
 

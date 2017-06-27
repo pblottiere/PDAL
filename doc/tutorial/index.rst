@@ -14,7 +14,6 @@ Getting Started
    :maxdepth: 1
 
    using
-   overview
 
 Using PDAL
 ----------
@@ -30,6 +29,7 @@ Using PDAL
    clipping-with-shapefile
    calculating-normalized-heights
    dart-throwing
+   python-filtering
 
 
 Developing
