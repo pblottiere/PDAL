@@ -215,7 +215,7 @@ Python HAG
 
 In our next example, the reader and writer types are once again inferred. After
 reading the input file, the ferry filter is used to copy the Z dimension into a
-new height above ground (HAG) dimension. Next, the :ref:`filters.programmable`
+new height above ground (HAG) dimension. Next, the :ref:`filters.python`
 is used with a Python script to compute height above ground values by comparing
 the Z values to a surface model. These height above ground values are then
 written back into the Z dimension for further analysis. See the Python
@@ -236,7 +236,7 @@ code at `hag.py`_.
               "dimensions":"Z=HAG"
           },
           {
-              "type":"programmable",
+              "type":"filters.python",
               "script":"hag.py",
               "function":"filter",
               "module":"anything"
@@ -252,8 +252,9 @@ DTM
 
 A common task is to create a digital terrain model (DTM) from the input point
 cloud. This pipeline infers the reader type, applies an approximate ground
-segmentation filter using :ref:`filters.pmf`, and then creates the DTM using
-the :ref:`writers.gdal` with only the ground returns.
+segmentation filter using :ref:`filters.pmf`, filters out all points but the
+ground returns (classification value of 2) using the :ref:`filters.range`, and
+then creates the DTM using the :ref:`writers.gdal`.
 
 .. code-block:: json
 
@@ -267,9 +268,11 @@ the :ref:`writers.gdal` with only the ground returns.
               "slope":1.0,
               "max_distance":2.5,
               "initial_distance":0.15,
-              "cell_size":1.0,
-              "extract":true,
-              "classify":false
+              "cell_size":1.0
+          },
+          {
+              "type":"range",
+              "limits":"Classification[2:2]"
           },
           {
               "type":"writers.gdal",
@@ -460,4 +463,3 @@ PDAL. Readers follow the pattern of :ref:`readers.las` or
 
     Issuing the command ``pdal info --options`` will list all available
     stages and their options. See :ref:`info_command` for more.
-

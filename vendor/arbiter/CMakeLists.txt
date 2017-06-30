@@ -19,7 +19,9 @@ target_link_libraries(${PDAL_ARBITER_LIB_NAME} )
 # Arbiter is built static but is included in a shared lib.
 #
 if (UNIX)
-target_compile_options(${PDAL_ARBITER_LIB_NAME} PRIVATE "-fPIC")
+    target_compile_options(${PDAL_ARBITER_LIB_NAME} PRIVATE "-fPIC")
+else()
+    target_compile_definitions(${PDAL_ARBITER_LIB_NAME} PUBLIC -DARBITER_DLL_EXPORT)
 endif()
 
 set_target_properties(${PDAL_ARBITER_LIB_NAME} PROPERTIES

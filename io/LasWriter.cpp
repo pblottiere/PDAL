@@ -96,7 +96,8 @@ void LasWriter::addArgs(ProgramArgs& args)
         decltype(m_dataformatId)(3));
     args.add("format", "Point format", m_dataformatId,
         decltype(m_dataformatId)(3));
-    args.add("global_encoding", "Global encoding byte", m_globalEncoding);
+    args.add("global_encoding", "Global encoding byte", m_globalEncoding,
+        decltype(m_globalEncoding)(0));
     args.add("project_id", "Project ID", m_projectId);
     args.add("system_id", "System ID", m_systemId,
         decltype(m_systemId)(m_lasHeader.getSystemIdentifier()));
@@ -225,7 +226,6 @@ void LasWriter::collectUserVLRs()
         addVlr(userId, recordId, description, data);
 
     }
-
 }
 
 
@@ -386,29 +386,25 @@ MetadataNode LasWriter::findVlrMetadata(MetadataNode node,
 
 void LasWriter::setPDALVLRs(MetadataNode& forward)
 {
-    std::ostringstream ostr;
-    Utils::toJSON(forward, ostr);
-    std::string json = ostr.str();
-
     auto store = [this](std::string json, int recordId, std::string description)
     {
         std::vector<uint8_t> data;
         data.resize(json.size());
         std::copy(json.begin(), json.end(), data.begin());
         addVlr("PDAL", recordId, description, data);
-
-
     };
 
+    std::ostringstream ostr;
+    Utils::toJSON(forward, ostr);
+    std::string json = ostr.str();
     store(ostr.str(), 12, "PDAL metadata");
+
     ostr.str("");
-
     PipelineWriter::writePipeline(this, ostr);
-
     store(ostr.str(), 13, "PDAL pipeline");
-
-
 }
+
+
 /// Set VLRs from metadata for forwarded info.
 void LasWriter::setVlrsFromMetadata(MetadataNode& forward)
 {
@@ -529,8 +525,15 @@ void LasWriter::addVlr(const std::string& userId, uint16_t recordId,
 {
     if (data.size() > LasVLR::MAX_DATA_SIZE)
     {
-        ExtLasVLR evlr(userId, recordId, description, data);
-        m_eVlrs.push_back(std::move(evlr));
+        if (m_lasHeader.versionAtLeast(1, 4))
+        {
+            ExtLasVLR evlr(userId, recordId, description, data);
+            m_eVlrs.push_back(std::move(evlr));
+        }
+        else
+            throwError("Can't write VLR with user ID/record ID = " +
+                userId + "/" + std::to_string(recordId) +
+                ".  The data size exceeds the maximum supported.");
     }
     else
     {
@@ -829,7 +832,7 @@ bool LasWriter::fillPointBuf(PointRef& point, LeInserter& ostream)
 
     auto converter = [this](double d, Dimension::Id dim) -> int32_t
     {
-        int32_t i;
+        int32_t i(0);
 
         if (!Utils::numericCast(d, i))
             throwError("Unable to convert scaled value (" +
@@ -961,6 +964,7 @@ void LasWriter::finishOutput()
 
     OLeStream out(m_ostream);
 
+    // addVlr prevents any eVlrs from being added before version 1.4.
     for (auto vi = m_eVlrs.begin(); vi != m_eVlrs.end(); ++vi)
     {
         ExtLasVLR evlr = *vi;

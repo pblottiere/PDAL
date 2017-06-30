@@ -59,6 +59,9 @@ public:
         { return &w.m_lasHeader; }
     SpatialReference srs(LasWriter& w)
         { return w.m_srs; }
+    void addVlr(LasWriter& w, const std::string& userId, uint16_t recordId,
+        std::string description, std::vector<uint8_t>& data)
+        { w.addVlr(userId, recordId, description, data); }
 };
 
 } // namespace pdal
@@ -343,7 +346,7 @@ TEST(LasWriterTest, forward)
     EXPECT_EQ(n1.findChild("filesource_id").value<uint8_t>(), 0);
     // Global encoding doesn't match because 4_1.las has a bad value, so we
     // get the default.
-    EXPECT_EQ(n1.findChild("global_encoding").value<uint8_t>(), 0);
+    EXPECT_EQ(n1.findChild("global_encoding").value<uint16_t>(), 0);
     EXPECT_EQ(n1.findChild("project_id").value<Uuid>(), Uuid());
     EXPECT_EQ(n1.findChild("system_id").value(), "");
     EXPECT_EQ(n1.findChild("software_id").value(), "TerraScan");
@@ -756,7 +759,8 @@ TEST(LasWriterTest, pdal_metadata)
 
 }
 
-TEST(LasWriterTest, pdal_set_from_metadata)
+
+TEST(LasWriterTest, pdal_add_vlr)
 {
     PointTable table;
 
@@ -769,11 +773,10 @@ TEST(LasWriterTest, pdal_set_from_metadata)
     Options readerOpts;
     readerOpts.add("filename", infile);
 
-
-    std::string metadata( " [ { \"description\": \"A description under 32 bytes\", \"record_id\": 42, \"user_id\": \"hobu\", \"data\": \"dGhpcyBpcyBzb21lIHRleHQ=\" },  { \"description\": \"A description under 32 bytes\", \"record_id\": 43, \"user_id\": \"hobu\", \"data\": \"dGhpcyBpcyBzb21lIG1vcmUgdGV4dA==\" } ]");
+    std::string vlr( " [ { \"description\": \"A description under 32 bytes\", \"record_id\": 42, \"user_id\": \"hobu\", \"data\": \"dGhpcyBpcyBzb21lIHRleHQ=\" },  { \"description\": \"A description under 32 bytes\", \"record_id\": 43, \"user_id\": \"hobu\", \"data\": \"dGhpcyBpcyBzb21lIG1vcmUgdGV4dA==\" } ]");
 
     Options writerOpts;
-    writerOpts.add("vlrs", metadata);
+    writerOpts.add("vlrs", vlr);
     writerOpts.add("filename", outfile);
 
     LasReader reader;
@@ -800,12 +803,91 @@ TEST(LasWriterTest, pdal_set_from_metadata)
         { return Utils::startsWith(temp.name(), "vlr_"); };
     MetadataNodeList nodes = forward.findChildren(pred);
     EXPECT_EQ(nodes.size(), 2UL);
-
-//     EXPECT_EQ(reader2.getMetadata().children("pdal_metadata").size(), 1UL);
-//     EXPECT_EQ(reader2.getMetadata().children("pdal_pipeline").size(), 1UL);
-
 }
+
+
+// Make sure that we can forward the LAS_Spec/3 VLR
+TEST(LasWriterTest, forward_spec_3)
+{
+    PointTable table;
+
+    std::string infile(Support::datapath("las/spec_3.las"));
+    std::string outfile(Support::temppath("out.las"));
+
+    // remove file from earlier run, if needed
+    FileUtils::deleteFile(outfile);
+
+    Options readerOpts;
+    readerOpts.add("filename", infile);
+
+    Options writerOpts;
+    writerOpts.add("forward", "all,vlr");
+    writerOpts.add("filename", outfile);
+
+    LasReader reader;
+    reader.setOptions(readerOpts);
+
+    LasWriter writer;
+    writer.setOptions(writerOpts);
+    writer.setInput(reader);
+
+    writer.prepare(table);
+    writer.execute(table);
+
+    PointTable t2;
+    Options readerOpts2;
+    readerOpts2.add("filename", outfile);
+    LasReader reader2;
+    reader2.setOptions(readerOpts2);
+
+    reader2.prepare(t2);
+    reader2.execute(t2);
+
+    auto pred = [](MetadataNode temp)
+    {
+        auto recPred = [](MetadataNode n)
+        {
+            return n.name() == "record_id" &&
+                n.value() == "3";
+        };
+
+        auto userPred = [](MetadataNode n)
+        {
+            return n.name() == "user_id" &&
+                n.value() == "LASF_Spec";
+        };
+
+        return Utils::startsWith(temp.name(), "vlr_") &&
+            !temp.findChild(recPred).empty() &&
+            !temp.findChild(userPred).empty();
+    };
+    MetadataNode root = reader2.getMetadata();
+    MetadataNodeList nodes = root.findChildren(pred);
+    EXPECT_EQ(nodes.size(), 1u);
+}
+
+TEST(LasWriterTest, oversize_vlr)
+{
+    LasWriter w;
+    Options o;
+
+    o.add("filename", "out.las");
+    w.addOptions(o);
+
+    PointTable t;
+
+    w.prepare(t);
+
+    std::vector<uint8_t> data(100000, 32);
+    LasTester tester;
+    EXPECT_THROW(
+        tester.addVlr(w, "USER ID", 555, "This is a description", data),
+        pdal_error);
+}
+
+
 /**
+
 namespace
 {
 
