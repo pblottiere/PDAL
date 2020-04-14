@@ -1,0 +1,15 @@
+[
+  {
+    "type":"readers.text",
+    "filename":"/home/pblottiere/data/WV_160N0615W_20140824_150332_inv_products_50M.xyz",
+    "separator":","
+  },
+  {
+    "type" : "filters.fake",
+    "k" : 3
+  },
+  {
+    "type":"writers.text",
+    "filename":"output.xyz"
+  }
+]
